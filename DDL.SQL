@@ -26,7 +26,7 @@ CREATE TABLE Restaurants(
     website		    VARCHAR(254)	,
     priceID         VARCHAR(5)      NOT NULL,             
     PRIMARY KEY		(restaurantID),
-    FOREIGN KEY     (priceID)     REFERENCES Price_Levels (priceID)
+    FOREIGN KEY     (priceID)     REFERENCES Price_Levels (priceID) ON DELETE RESTRICT
 );
 
 /* create Cuisines entity */
@@ -42,11 +42,10 @@ DROP TABLE IF EXISTS Restaurants_has_Cuisines;
 CREATE TABLE Restaurants_has_Cuisines(
 	restaurant_cuisineID	INT 			NOT NULL AUTO_INCREMENT UNIQUE,
     cuisineID		        INT 	        NOT NULL,
-    restaurantID	        INT 	        NOT NULL,
-            
+    restaurantID	        INT 	        NOT NULL,           
     PRIMARY KEY		(restaurant_cuisineID),
-    FOREIGN KEY     (cuisineID)         REFERENCES Cuisines (cuisineID),
-    FOREIGN KEY     (restaurantID)      REFERENCES Restaurants (restaurantID)
+    FOREIGN KEY     (cuisineID)         REFERENCES Cuisines (cuisineID) ON DELETE CASCADE,
+    FOREIGN KEY     (restaurantID)      REFERENCES Restaurants (restaurantID) ON DELETE CASCADE
 );
 
 
@@ -61,8 +60,7 @@ CREATE TABLE Reviewers(
     city    		VARCHAR(25)		NOT NULL,
     state	        VARCHAR(15)	    NOT NULL,
     zipCode     	VARCHAR(9)	    ,
-    emailAddress	VARCHAR(254)	,
-    totalReviews    VARCHAR(5)      NOT NULL,             
+    emailAddress	VARCHAR(254)	,             
     PRIMARY KEY		(reviewerID)
 );
 
@@ -76,11 +74,11 @@ CREATE TABLE Reviews(
     reviewerRating      INT(5)          NOT NULL,
     takesReservation    VARCHAR(10)     ,
     delivery            VARCHAR(10)     ,
-    reviewerID		    INT 	        NOT NULL,
-    restaurantID	    INT 	        NOT NULL,
-    PRIMARY KEY		(reviewID),
-    FOREIGN KEY     (reviewerID)        REFERENCES Reviewers (reviewerID),
-    FOREIGN KEY     (restaurantID)      REFERENCES Restaurants (restaurantID)
+    reviewerID		    INT 	        ,
+    restaurantID	    INT 	        ,
+    PRIMARY KEY		(reviewID)          ,
+    FOREIGN KEY     (reviewerID)        REFERENCES Reviewers (reviewerID) ON DELETE SET NULL,
+    FOREIGN KEY     (restaurantID)      REFERENCES Restaurants (restaurantID) ON DELETE SET NULL
 );
 
 /* create Expenses entity */
@@ -89,14 +87,15 @@ CREATE TABLE Expenses(
 	expenseID	        INT 			NOT NULL AUTO_INCREMENT UNIQUE,
     date                DATE            NOT NULL,
     totalExpense        DECIMAL(5,2)    NOT NULL,
-    description	   	VARCHAR(254)    NOT NULL,
+    description         VARCHAR(254)    NOT NULL,
     expenseStatus       VARCHAR(20)     NOT NULL,
-    reviewerID		INT 	NOT NULL,
+    reviewerID		    INT 	        NOT NULL,
     reviewID	        INT 	        NOT NULL,
-    PRIMARY KEY		(expenseID),
-    FOREIGN KEY     (reviewerID)        REFERENCES Reviewers (reviewerID),
-    FOREIGN KEY     (reviewID)          REFERENCES Reviews (reviewID)
+    PRIMARY KEY		(expenseID)         ,
+    FOREIGN KEY     (reviewerID)        REFERENCES Reviewers (reviewerID) ON DELETE CASCADE,
+    FOREIGN KEY     (reviewID)          REFERENCES Reviews (reviewID) ON DELETE CASCADE
 );
+
 
 /* 
 Insert Data 
@@ -180,10 +179,6 @@ VALUES
 (2, '2022-05-03', 25.00, "Parking at Mercantile Dining & Provisions", 'Pending', 1, 2),
 (3, '2022-06-01', 100.00, "Mileage to Iron Grill Hawaii food truck", 'Approved', 2, 3),
 (4, '2022-06-15', 85.00, "Lunch at Iron Grill Hawaii food truck", 'Rejected', 2, 3);
-
-
-
-
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
