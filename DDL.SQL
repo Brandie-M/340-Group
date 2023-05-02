@@ -1,4 +1,4 @@
-
+ 
 
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,9 +37,9 @@ CREATE TABLE Cuisines(
     PRIMARY KEY		(cuisineID)
 );
 
-/* create Restaurants_has_Cuisines entity */
-DROP TABLE IF EXISTS Restaurants_has_Cuisines;
-CREATE TABLE Restaurants_has_Cuisines(
+/* create Restaurant_has_Cuisines entity */
+DROP TABLE IF EXISTS Restaurant_has_Cuisines;
+CREATE TABLE Restaurant_has_Cuisines(
 	restaurant_cuisineID	INT 			NOT NULL AUTO_INCREMENT UNIQUE,
     cuisineID		        INT 	        NOT NULL,
     restaurantID	        INT 	        NOT NULL,           
@@ -103,17 +103,43 @@ Insert Data
 
 
 /* Restaurants sample data */
+INSERT INTO Restaurants (restaurantID, name, streetAddress, city, state, zipCode, phoneNumber, website, priceID)
+VALUES
+(1, 'Duke\'s Waikiki', '2335 Kalakaua Ave', 'Honolulu', 'HI', '96815', '(808) 922-2268', 'https://www.dukeswaikiki.com/', '$$$'),
+(2, 'Iron Grill Hawaii Food Truck', NULL, 'Honolulu', 'HI', '96815', '(808) 202-7939', NULL, '$$'),
+(3, 'Sushi Den', '1487 S Pearl St', 'Denver', 'CO', '80210', '(303) 777-0826', 'https://www.sushiden.net/', '$$$'),
+(4, 'Mercantile Dining & Provisions', '1701 Wynkoop St', 'Denver', 'CO', '80202', '(720) 460-3733', 'https://www.mercantiledenver.com/', '$$$$'),
+(5, 'Flagstaff House', '1138 Flagstaff Rd', 'Boulder', 'CO', '80302', '(303) 442-4640', 'https://www.flagstaffhouse.com/', '$$$$');
 
 
 
 /* Cuisines sample data */
-
-
+INSERT INTO Cuisines (cuisineID, cuisineDescription)
+VALUES
+(1, 'Seafood'),
+(2, 'Steak'),
+(3, 'Japanese'),
+(4, 'Hawaiian'),
+(5, 'American');
 
 /* Restaurant_has_Cuisines sample data */
+INSERT INTO Restaurant_has_Cuisines (restaurant_cuisineID, cuisineID, restaurantID)
+VALUES
+(1, 1, 1),
+(2, 4, 1),
+(3, 2, 2),
+(4, 5, 4),
+(5, 5, 5);
 
 
 /* Price_Levels sample data */
+INSERT INTO Price_Levels (priceID, priceRange)
+VALUES
+('$', '$1-10'),
+('$$', '$10-30'),
+('$$$', '$30-60'),
+('$$$$', '$60-100'),
+('$$$$$', '$100+');
 
 
 
