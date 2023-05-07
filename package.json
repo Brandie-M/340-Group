@@ -1,0 +1,23 @@
+{
+  "name": "340-group",
+  "version": "1.0.0",
+  "description": "CS340 Restaurant Review Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brandie-M/340-Group.git"
+  },
+  "author": "Brandie and  Joana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brandie-M/340-Group/issues"
+  },
+  "homepage": "https://github.com/Brandie-M/340-Group#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3"
+  }
+}
