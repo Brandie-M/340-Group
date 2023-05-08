@@ -44,6 +44,8 @@ VALUES (:nameInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput,
 
 -- Update
 
+
+
 -- Delete One
 DELETE FROM Restaurants WHERE restaurantID= :restaurantID_selected_from_browse;
 
