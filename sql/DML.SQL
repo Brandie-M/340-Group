@@ -1,0 +1,102 @@
+
+-----------------------------
+-- Restaurants --
+-----------------------------
+-- Browse All
+------Shows all attributes in table and displays the name of the price level from  Price_Levels
+SELECT Restaurants.restaurantID, Restaurants.name, Restaurants.streetAddress, Restaurants.city, 
+Restaurants.state, Restaurants.zipCode, Restaurants.phoneNumber, Restaurants.website, Price_Levels.priceRange as Price_Levels
+FROM Restaurants
+JOIN Price_Levels ON Restaurants.priceID = Price_Levels.priceID;
+
+-- Insert New
+INSERT INTO Restaurants (name, streetAddress, city, state, zipCode, phoneNumber, website, ) 
+VALUES (:nameInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput, :phoneNumberInput, :websiteInput, :priceID_from_dropdown_Input);
+
+-- Get Price_Levels > priceRange to populate dropdown
+
+
+-----------------------------
+-- Cuisines --
+-----------------------------
+-- Browse All
+SELECT * from Cuisines;
+
+
+-- Insert New
+INSERT INTO Cuisines (cuisineDescription)
+VALUES (:cuisineDescriptionInput);
+
+-----------------------------
+-- Restaurant_has_Cuisines --
+-----------------------------
+-- Browse All
+SELECT Restaurant_has_Cuisines.restaurant_cuisineID, Cuisines.cuisineDescription as Cuisine_Name, Restaurants.name as Restaurant_Name
+FROM Restaurant_has_Cuisines
+JOIN Cuisines ON Restaurant_has_Cuisines.cuisineID = Cuisines.cuisineID
+JOIN Restaurants ON Restaurant_has_Cuisines.restaurantID = Restaurants.restaurantID;
+
+-- Insert New
+
+
+-- Update Existing
+
+
+-- Delete One 
+
+
+-----------------------------
+-- Price Levels --
+-----------------------------
+-- Browse All
+SELECT * FROM Price_Levels;
+
+
+-- Insert New
+INSERT INTO Price_Levels (priceID, priceRange)
+VALUES (:priceID_Input, :priceRange_Input);
+
+
+
+-----------------------------
+-- Reviewers --
+-----------------------------
+-- Browse All
+SELECT * from Reviewers;
+
+
+-- Insert New
+INSERT INTO Reviewers (firstName, lastName, phoneNumber, streetAddress, city, state, zipCode, emailAddress)
+VALUES (:firstNameInput, :lastNameInput, :phoneNumberInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput, :emailAddressInput);
+
+
+-----------------------------
+-- Reviews --
+-----------------------------
+-- Browse All
+SELECT Reviews.reviewID, Reviews.reviewDate, Reviews.reviewTitle, Reviews.reviewDescription, Reviews.reviewerRating, 
+Reviews.takesReservation, Reviews.delivery, Reviewers.lastName as Reviewer_Last_Name, Restaurants.name as Restaurant_Name
+FROM Reviews
+JOIN Reviewers ON Reviews.reviewerID = Reviewers.reviewerID
+JOIN Restaurants ON Reviews.restaurantID = Restaurants.restaurantID
+ORDER BY Reviews.reviewDate desc;
+
+-- Insert New
+
+
+-- Update Existing
+
+
+-----------------------------
+-- Expenses --
+-----------------------------
+-- Browse All
+------ Note, chose to leave the reviewID as the ID number instead of adding the review name. 
+-------Similar to referencing an invoice id rather than the items in an order.
+SELECT Expenses.expenseID, Expenses.date, Expenses.totalExpense, Expenses.description, 
+Expenses.expenseStatus, Reviewers.lastName as Reviewer_Last_Name, Expenses.reviewID
+FROM Expenses
+JOIN Reviewers ON Expenses.reviewerID = Reviewers.reviewerID;
+
+
+-- Insert New
