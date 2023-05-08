@@ -41,6 +41,12 @@ INSERT INTO Restaurants (name, streetAddress, city, state, zipCode, phoneNumber,
 VALUES (:nameInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput, 
         :phoneNumberInput, :websiteInput, :priceID_from_dropdown_Input);
 
+
+-- Update
+
+-- Delete One
+DELETE FROM Restaurants WHERE restaurantID= :restaurantID_selected_from_browse;
+
 -----------------------------
 -- Cuisines --
 -----------------------------

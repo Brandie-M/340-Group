@@ -2,10 +2,77 @@
 <html>
 <head>
   <title>Cuisines</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
+  <header>
+    <h1>Eating 'Round the World</h1>
+    <nav class="page-nav">
+      <a href="/">Home</a>
+      <a href="/restaurants">Restaurants</a>
+      <a href="/restaurant_has_cuisines">Restaurant Cuisines</a>
+      <a href="/cuisines">Cuisines</a>
+      <a href="/price_levels">Price Levels</a>
+      <a href="/reviews">Reviews</a>
+      <a href="/reviewers">Reviewers</a>
+      <a href="/expenses">Expenses</a>
+    </nav>
+  </header>
+
     <h1>Cuisines</h1>
 
-</body>
-</html>
+    <section>
+      <h2>Browse Cuisines</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Cuisine ID</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Seafood</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Steak</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Japanese</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Hawaiian</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>American</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </section>
+
+    <section>
+      <h2>Add New Cuisine</h2>
+
+      <form action="/submit-form" method="post">
+      
+        <label for="cuisineDescription">Cuisine Description:</label>
+        <input type="text" id="cuisineDescription" name="cuisineDescription"><br>
+    
+      
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+
+    <footer>
+      <p> &copy; 2023 Joana Shin, Brandie McGinnes</p>
+    </footer>
+  </body>
+  </html>
