@@ -81,6 +81,38 @@
 
     <section>
       <h2>Add New Expense</h2>
+      <form action="/submit-form" method="post">
+              
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date"><br>
+      
+        <label for="totalExpense">Total Expense:</label>
+        <input type="number" id="totalExpense" name="totalExpense"><br>
+      
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description"><br>
+      
+        <label for="expenseStatus">Status:</label>
+        <input type="text" id="expenseStatus" name="expenseStatus" value="Pending"><br>
+      
+      
+        <label for="reviewerLastName">Reviewer Last Name:</label>
+        <select id="reviewerLastName" name="reviewerLastName">
+          <option value="1">Smith</option>
+          <option value="2">Wong</option>
+          <option value="3">Johnson</option>
+          <option value="4">Hernandez</option>
+        </select><br>
+
+        <label for="reviewID">Review Number:</label>
+        <select id="reviewID" name="reviewID">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select><br>
+      
+        <input type="submit" value="Submit">
+      </form>
     </section>
 
     <footer>
