@@ -2,10 +2,200 @@
 <html>
 <head>
   <title>Restaurants</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
+  <header>
+    <h1>Eating 'Round the World</h1>
+    <nav class="page-nav">
+      <a href="/">Home</a>
+      <a href="/restaurants">Restaurants</a>
+      <a href="/restaurant_has_cuisines">Restaurant Cuisines</a>
+      <a href="/cuisines">Cuisines</a>
+      <a href="/price_levels">Price Levels</a>
+      <a href="/reviews">Reviews</a>
+      <a href="/reviewers">Reviewers</a>
+      <a href="/expenses">Expenses</a>
+    </nav>
+  </header>
+
     <h1>Restaurants</h1>
 
+            <section>
+            <h3>Browse Restaurants</h3>
+            <p>
+                <button onclick="href=restaurant_delete.html">Add New Item</button>
+            </p>
+            <table border="1" padding="5">
+                <thead>
+                  <tr>
+                    <th>Restaurant ID</th>
+                    <th>Name</th>
+                    <th>Street Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th>Phone Number</th>
+                    <th>Website</th>
+                    <th>Price ID</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Duke's Waikiki</td>
+                    <td>2335 Kalakaua Ave</td>
+                    <td>Honolulu</td>
+                    <td>HI</td>
+                    <td>96815</td>
+                    <td>(808) 922-2268</td>
+                    <td>https://www.dukeswaikiki.com/</td>
+                    <td>$$$</td>
+                    <td><a href="restuarant_update.html">Update</a></td>
+                    <td><a href="restuarant_delete.html">Delete</a></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Iron grill Hawaii Food Truck</td>
+                    <td></td>
+                    <td>Honolulu</td>
+                    <td>HI</td>
+                    <td>96815</td>
+                    <td>(808) 202-7939</td>
+                    <td></td>
+                    <td>$$</td>
+                    <td><a href="restuarant_update.html">Update</a></td>
+                    <td><a href="restuarant_delete.html">Delete</a></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Sushi Den</td>
+                    <td>1487 S Pearl St</td>
+                    <td>Denver</td>
+                    <td>CO</td>
+                    <td>80210</td>
+                    <td>(303) 777-0826</td>
+                    <td>https://www.sushiden.net/</td>
+                    <td>$$$</td>
+                    <td><a href="restuarant_update.html">Update</a></td>
+                    <td><a href="restuarant_delete.html">Delete</a></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Mercantile Dining & Provisions</td>
+                    <td>1701 Wynkoop St</td>
+                    <td>Denver</td>
+                    <td>CO</td>
+                    <td>80202</td>
+                    <td>(720) 460-3733</td>
+                    <td>https://www.mercantiledenver.com/</td>
+                    <td>$$$$</td>
+                    <td><a href="restuarant_update.html">Update</a></td>
+                    <td><a href="restuarant_delete.html">Delete</a></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Flagstaff House</td>
+                    <td>1138 Flagstaff Rd</td>
+                    <td>Boulder</td>
+                    <td>CO</td>
+                    <td>80302</td>
+                    <td>(303) 442-4640</td>
+                    <td>https://www.flagstaffhouse.com/</td>
+                    <td>$$$$</td>
+                    <td><a href="restuarant_update.html">Update</a></td>
+                    <td><a href="restuarant_delete.html">Delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+
+        <section>
+            <h3>Add Restaurant</h3>
+            <form action="/submit-form" method="post">
+                <label for="restaurantID">Restaurant ID:</label>
+                <input type="text" id="restaurantID" name="restaurantID"><br>
+              
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br>
+              
+                <label for="streetAddress">Street Address:</label>
+                <input type="text" id="streetAddress" name="streetAddress"><br>
+              
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city"><br>
+              
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state"><br>
+              
+                <label for="zipCode">Zip Code:</label>
+                <input type="text" id="zipCode" name="zipCode"><br>
+              
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber"><br>
+              
+                <label for="website">Website:</label>
+                <input type="text" id="website" name="website"><br>
+              
+                <label for="priceID">Price Level</label>
+                <select id="priceID" name="priceID">
+                  <option value="$">$1-10</option>
+                  <option value="$$">$10-30</option>
+                  <option value="$$$">$30-60</option>
+                  <option value="$$$$">$60-100</option>
+                  <option value="$$$$$">$100+</option>
+                </select><br>
+              
+                <input type="submit" value="Submit">
+              </form>
+              
+        </section>
+
+        <section>
+            <h3>Update Restaurant</h3>
+            <form action="/submit-form" method="post">
+                <label for="restaurantID">Restaurant ID:</label>
+                <input type="text" id="restaurantID" name="restaurantID" value="3"><br>
+              
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="Sushi Den"><br>
+              
+                <label for="streetAddress">Street Address:</label>
+                <input type="text" id="streetAddress" name="streetAddress" value="1487 S Pearl St"><br>
+              
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" value="Denver"><br>
+              
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" value="CO"><br>
+              
+                <label for="zipCode">Zip Code:</label>
+                <input type="text" id="zipCode" name="zipCode" value="80210"><br>
+              
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" value="(303) 777-0826"><br>
+              
+                <label for="website">Website:</label>
+                <input type="text" id="website" name="website" value="https://www.sushiden.net/"><br>
+              
+                <label for="priceID">Price Level</label>
+                <select id="priceID" name="priceID">
+                  <option value="$">$1-10</option>
+                  <option value="$$">$10-30</option>
+                  <option value="$$$" selected>$30-60</option>
+                  <option value="$$$$">$60-100</option>
+                  <option value="$$$$$">$100+</option>
+                  </select>
+              
+                <input type="submit" value="Submit">
+              </form>
+        </section>
+
+  <footer>
+    <p> &copy; 2023 Joana Shin, Brandie McGinnes</p>
+  </footer>
 </body>
 </html>
