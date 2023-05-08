@@ -5,7 +5,7 @@
 var express = require('express');   // We are using the express library for the web server
 var path = require('path');         // Requiring path to navigate directories
 var app     = express();            // Need to instantiate an express object to interact with the server in our code
-PORT        = 9181;                 // Port number 
+PORT        = 9182;                 // Port number 
 
 
 // Database
