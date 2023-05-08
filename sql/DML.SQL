@@ -1,3 +1,29 @@
+-----------------------------
+-- Dropdowns --
+---- queries for populating dropdowns for the foreign keys in forms
+-----------------------------
+
+-- Price_Levels 
+SELECT priceID, priceRange FROM Price_Levels;
+
+-- Cuisines 
+SELECT cuisineID, name FROM Cuisines;
+
+-- Restaurants 
+SELECT restaurantID, name FROM Restaurants;
+
+-- Reviewers
+SELECT reviewerID, lastName FROM Reviewers;
+
+-- Reviews
+SELECT reviewID FROM Reviews;
+
+
+
+
+-----------------------------
+-------- ENTITIES -----------
+-----------------------------
 
 -----------------------------
 -- Restaurants --
@@ -9,12 +35,11 @@ Restaurants.state, Restaurants.zipCode, Restaurants.phoneNumber, Restaurants.web
 FROM Restaurants
 JOIN Price_Levels ON Restaurants.priceID = Price_Levels.priceID;
 
+
 -- Insert New
-INSERT INTO Restaurants (name, streetAddress, city, state, zipCode, phoneNumber, website, ) 
-VALUES (:nameInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput, :phoneNumberInput, :websiteInput, :priceID_from_dropdown_Input);
-
--- Get Price_Levels > priceRange to populate dropdown
-
+INSERT INTO Restaurants (name, streetAddress, city, state, zipCode, phoneNumber, website, priceID) 
+VALUES (:nameInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput, 
+        :phoneNumberInput, :websiteInput, :priceID_from_dropdown_Input);
 
 -----------------------------
 -- Cuisines --
@@ -35,6 +60,7 @@ SELECT Restaurant_has_Cuisines.restaurant_cuisineID, Cuisines.cuisineDescription
 FROM Restaurant_has_Cuisines
 JOIN Cuisines ON Restaurant_has_Cuisines.cuisineID = Cuisines.cuisineID
 JOIN Restaurants ON Restaurant_has_Cuisines.restaurantID = Restaurants.restaurantID;
+
 
 -- Insert New
 
