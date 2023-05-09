@@ -125,9 +125,6 @@ VALUES (:reviewDateInput, :reviewTitleInput, :reviewDescriptionInput, :reviewerR
 -- Update Existing
 UPDATE Reviews SET reviewDate = :reviewDateInput, reviewTitle = :reviewTitleInput, reviewDescription = :reviewDescriptionInput, reviewerRating = :reviewerRatingInput, takesReservation = :takesReservationInput, delivery = :deliveryInput WHERE reviewID = :reviewIDInput;
 
--- Delete One
-DELETE FROM Reviews WHERE reviewID = :reviewIDInput;
-
 
 -----------------------------
 -- Expenses --
