@@ -71,12 +71,15 @@ JOIN Restaurants ON Restaurant_has_Cuisines.restaurantID = Restaurants.restauran
 
 
 -- Insert New
+INSERT into Restaurant_has_Cuisines (restaurant_cuisineID, cuisineID, restaurantID)
+VALUES (:cuisineIDinput, :restaurantIDinput);
 
 
 -- Update Existing
-
+UPDATE Restaurant_has_Cuisines SET cuisineID = :cuisineIDInput, restaurantID = :restaurantIDInput WHERE restaurant_cuisineID = :restaurant_cuisineID;
 
 -- Delete One 
+DELETE FROM Restaurant_has_Cuisines WHERE restaurant_cuisineID = :restaurant_cuisineIDInput;
 
 
 -----------------------------
@@ -116,9 +119,14 @@ JOIN Restaurants ON Reviews.restaurantID = Restaurants.restaurantID
 ORDER BY Reviews.reviewDate desc;
 
 -- Insert New
-
+INSERT INTO Reviews (reviewDate, reviewTitle, reviewDescription, reviewerRating, takesReservation, delivery, reviewerID, restaurantID)
+VALUES (:reviewDateInput, :reviewTitleInput, :reviewDescriptionInput, :reviewerRatingInput, :takesReservationInput, :deliveryInput, :reviewerIDInput, :restaurantIDInput);
 
 -- Update Existing
+UPDATE Reviews SET reviewDate = :reviewDateInput, reviewTitle = :reviewTitleInput, reviewDescription = :reviewDescriptionInput, reviewerRating = :reviewerRatingInput, takesReservation = :takesReservationInput, delivery = :deliveryInput WHERE reviewID = :reviewIDInput;
+
+-- Delete One
+DELETE FROM Reviews WHERE reviewID = :reviewIDInput;
 
 
 -----------------------------

@@ -7,6 +7,7 @@
 <body>
 
   <header>
+
     <h1>Eating 'Round the World</h1>
     <nav class="page-nav">
       <a href="/">Home</a>
@@ -18,12 +19,15 @@
       <a href="/reviewers">Reviewers</a>
       <a href="/expenses">Expenses</a>
     </nav>
+
   </header>
 
     <h1>Reviews</h1>
 
     <table>
+
       <thead>
+
         <tr>
           <th>reviewID</th>
           <th>reviewDate</th>
@@ -34,6 +38,142 @@
           <th>delivery</th>
           <th>reviewerID</th>
           <th>restaurantID</th>
+          <th>update</th>
+          <th>delete</th>
         </tr>
+
       </thead>
-   
+
+      <body>  
+
+        <tr>
+          <td>1</td>
+          <td>2022-04-15</td>
+          <td>Great food and service</td>
+          <td><p>If you're looking for a restaurant that combines stunning ocean views, great food, and excellent service, look no further than Duke's Waikiki in Honolulu, Hawaii. I recently had the pleasure of dining at Duke's Waikiki and I must say, I was thoroughly impressed with the entire experience.</p></td>
+          <td>4.5</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td>2</td>
+          <td>1</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>2022-05-02</td>
+          <td>Disappointing meal</td>
+          <td><p>My recent experience at Mercantile Dining & Provisions in Denver was disappointing. The food was average at best and lacked any real flavor or creativity. The service was slow and inattentive. Overall, I would not recommend this restaurant.</p></td>
+          <td>2</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>1</td>
+          <td>4</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+          <td>2022-05-10</td>
+          <td>Fantastic experience</td>
+          <td><p>
+              Iron Grill Hawaii food truck is a hidden gem in Honolulu. The food is exceptional, and the service is top-notch. From the moment we placed our order, we felt welcomed and well taken care of. I highly recommend this food truck to anyone looking for a delicious and memorable dining experience in Hawaii.</p></td>
+          </td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td>2</td>
+          <td>2</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+      
+      </body>
+    
+    </table>
+
+    <h2>Add New Review</h2>
+
+    <section>
+      <form action="/submit-form" method="post">
+        
+        <label for="restaurantID">Restaurant:</label>
+        <select id="restaurantName" name="restaurantName">
+          <option value="1">Duke's Waikiki</option>
+          <option value="2">Iron grill Hawaii Food Truck</option>
+          <option value="3">Sushi Den</option>
+          <option value="4">Mercantile Dining & Provisions</option>
+          <option value="4">Flagstaff House</option>
+        </select><br>    
+        
+        <label for="reviewDate">Review Date:</label>
+        <input type="date" id="reviewDate" name="reviewDate"><br>
+      
+        <label for="reviewTitle">Review Title:</label>
+        <input type="text" id="reviewTitle" name="reviewTitle"><br>
+
+        <label for="reviewDescription">Review Description:</label>
+        <textarea 
+          id="reviewDescription"
+          name="reviewDescription"
+          rows="1" cols="35"></textarea><br>
+
+        <label for="reviewerRating">Reviewer Rating:</label>
+        <input type="text" id="reviewerRating" name="reviewerRating"><br>
+      
+        <label for="takesReservation">Takes Reservation:</label>
+        <input type="text" id="takesReservation" name="takesReservation"><br>
+      
+        <label for="delivery">Delivery:</label>
+        <input type="text" id="delivery" name="delivery"><br>
+
+        <label for="reviewerID">Reviewer ID:</label>
+        <input type="text" id="reviewerID" name="reviewerID"><br>
+         
+
+        <input type="submit" value="Submit">
+      </form>
+
+    </section>
+
+
+    <section>
+      <h2>Update Review</h2>
+      <form action="/submit-form" method="post">
+          <label for="reviewID">Review ID:</label>
+          <input type="text" id="reviewID" name="reviewID"><br>
+        
+          <label for="reviewDate">Review Date:</label>
+          <input type="date" id="reviewDate" name="reviewDate"><br>
+        
+          <label for="reviewTitle">Review Title:</label>
+          <input type="text" id="reviewTitle" name= "reviewTitle" ><br>
+        
+          <label for="reviewDescription">Review Description:</label>
+          <textarea 
+          id="reviewDescription"
+          name="reviewDescription"
+          rows="1" cols="35"></textarea><br>
+        
+          <label for="reviewerRating">Reviewer Rating</label>
+          <input type="text" id="reviewerRating" name="reviewerRating"><br>
+        
+          <label for="takesReservation">Takes Reservation:</label>
+          <input type="text" id="takesReservation" name="takesReservation"><br>
+        
+          <label for="delivery">Delivery:</label>
+          <input type="text" id="delivery" name="delivery"><br>
+           
+
+          <input type="submit" value="Submit">
+        </form>
+  </section>
+
+    <footer>
+      <p> &copy; 2023 Joana Shin, Brandie McGinnes</p>
+    </footer>
+
+  </body>
+  </html>

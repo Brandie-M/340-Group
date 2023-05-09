@@ -12,23 +12,23 @@ body {
     margin: 0 0 25px 0;
   }
 
-    .page-nav a {
-        background-color: #88ab75;
-        color: #fff;
-        box-shadow: 1px 1px 1px 1px #6e6d6d;
-        border-radius: 5px;
-        padding: 5px;
-        margin: 5px;
-        font-weight: bolder;
-        text-decoration: none;
-        line-height: 55px;
-        word-break: keep-all;
-      }
-      .page-nav a:hover {
-        background-color:var(--brick-light);
-        color: var(--green-accent);
-      }
-    
+.page-nav a {
+    background-color: #88ab75;
+    color: #fff;
+    box-shadow: 1px 1px 1px 1px #6e6d6d;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    font-weight: bolder;
+    text-decoration: none;
+    line-height: 55px;
+    word-break: keep-all;
+  }
+  .page-nav a:hover {
+    background-color:var(--brick-light);
+    color: var(--green-accent);
+  }
+
 
   
   h1 {

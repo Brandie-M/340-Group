@@ -2,10 +2,157 @@
 <html>
 <head>
   <title>Restaurant_has_Cuisines</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-    <h1>Restaurant_has_Cuisines</h1>
+  <header>
+    <h1>Eating 'Round the World</h1>
+    <nav class="page-nav">
+      <a href="/">Home</a>
+      <a href="/restaurants">Restaurants</a>
+      <a href="/restaurant_has_cuisines">Restaurant Cuisines</a>
+      <a href="/cuisines">Cuisines</a>
+      <a href="/price_levels">Price Levels</a>
+      <a href="/reviews">Reviews</a>
+      <a href="/reviewers">Reviewers</a>
+      <a href="/expenses">Expenses</a>
+    </nav>
+  </header>
+
+  <h1>Restaurant Cuisines</h1>
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <th>restaurant_CuisineID</th>
+        <th>cuisineID</th>
+        <th>restaurantID</th>
+        <th>update</th>
+        <th>delete</th>
+
+    </thead>
+
+    <body>  
+
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>4</td>
+        <td>1</td>
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+      </tr>
+
+      <tr>
+        <td>3</td>
+        <td>2</td>
+        <td>2</td>
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+      </tr>
+
+      <tr>
+        <td>4</td>
+        <td>5</td>
+        <td>4</td>
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+      </tr>
+
+      <tr>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+      </tr>
+    
+    </body>
+  
+  </table>
+
+  <h2>Add Cuisines to Restaurant</h2>
+
+    <section>
+      <form action="/submit-form" method="post">
+
+        <label for="restaurantID">Restaurant ID:</label><br>
+        <select for="restaurantID" id="restaurantID">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <br>
+        
+        <label for="cuisineDescription">Type of Cuisine:</label><br>
+        <select for="cuisineDescription" id="cuisineDescription">
+          <option value="Seafood">Seafood</option>
+          <option value="Steak">Steak</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Hawaiian">Hawaiian</option>
+          <option value="American">American</option>
+        </select>
+        <br>
+      
+
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+
+
+    <section>
+      <h2>Update Restaurant Cuisine</h2>
+      <form action="/submit-form" method="post">
+
+        <label for="restaurant_CuisineID">Restaurant Cusine ID:</label><br>
+        <select for="restaurant_CuisineID" id="restaurant_CuisineID">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <br>
+          
+        <label for="restaurantID">Restaurant ID:</label><br>
+        <select for="restaurantID" id="restaurantID">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <br>
+          
+        <label for="cuisineDescription">Type of Cuisine:</label><br>
+        <select for="cuisineDescription" id="cuisineDescription">
+          <option value="Seafood">Seafood</option>
+          <option value="Steak">Steak</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Hawaiian">Hawaiian</option>
+          <option value="American">American</option>
+        </select>
+        <br>
+          <input type="submit" value="Submit">
+        </form>
+  </section>
+
+  <footer>
+    <p> &copy; 2023 Joana Shin, Brandie McGinnes</p>
+  </footer>
 
 </body>
 </html>
+
