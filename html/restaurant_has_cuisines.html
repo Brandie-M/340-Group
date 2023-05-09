@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Restaurant_has_Cuisines</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="../public/style.css">
 </head>
 <body>
 
@@ -22,87 +22,92 @@
 
   <h1>Restaurant Cuisines</h1>
 
-  <table>
+  <section>
+    <h2>Browse</h2>
+    <table border="1" padding="5">
 
-    <thead>
+      <thead>
 
-      <tr>
-        <th>restaurant_CuisineID</th>
-        <th>cuisineID</th>
-        <th>restaurantID</th>
-        <th>update</th>
-        <th>delete</th>
+        <tr>
+          <th>ID</th>
+          <th>Cuisine Name</th>
+          <th>Restaurant Name</th>
+          <th>Update</th>
+          <th>Delete</th>
 
-    </thead>
+      </thead>
 
-    <body>  
+      <body>  
 
-      <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
-      </tr>
+        <tr>
+          <td>1</td>
+          <td>Seafood</td>
+          <td>Duke's Waikiki</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
 
-      <tr>
-        <td>2</td>
-        <td>4</td>
-        <td>1</td>
-        <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
-      </tr>
+        <tr>
+          <td>2</td>
+          <td>Hawaiian</td>
+          <td>Duke's Waikiki</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
 
-      <tr>
-        <td>3</td>
-        <td>2</td>
-        <td>2</td>
-        <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
-      </tr>
+        <tr>
+          <td>3</td>
+          <td>Japanese</td>
+          <td>Iron grill Hawaii Food Truck</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
 
-      <tr>
-        <td>4</td>
-        <td>5</td>
-        <td>4</td>
-        <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
-      </tr>
+        <tr>
+          <td>4</td>
+          <td>American</td>
+          <td>Mercantile Dining & Provisions</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
 
-      <tr>
-        <td>5</td>
-        <td>5</td>
-        <td>5</td>
-        <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
-      </tr>
+        <tr>
+          <td>5</td>
+          <td>American</td>
+          <td>Flagstaff House</td>
+          <td><a href="#">Update</a></td>
+          <td><a href="#">Delete</a></td>
+        </tr>
+      
+      </body>
     
-    </body>
+    </table>
+  </section>
   
-  </table>
-
-  <h2>Add Cuisines to Restaurant</h2>
 
     <section>
+      <h3>Add Cuisine to Restaurant</h3>
       <form action="/submit-form" method="post">
 
-        <label for="restaurantID">Restaurant ID:</label><br>
-        <select for="restaurantID" id="restaurantID">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+        <label for="restaurant_name">Restaurant Name:</label>
+        <select for="restaurant_name" id="restaurant_name">
+          <option value="1">Duke's Waikiki</option>
+          <option value="2">Iron grill Hawaii Food Truck</option>
+          <option value="3">Sushi Den</option>
+          <option value="4">Mercantile Dining & Provision</option>
+          <option value="5">Flagstaff House</option>
+          <option value="empty" selected></option>
         </select>
         <br>
         
-        <label for="cuisineDescription">Type of Cuisine:</label><br>
+        <label for="cuisineDescription">Type of Cuisine:</label>
         <select for="cuisineDescription" id="cuisineDescription">
           <option value="Seafood">Seafood</option>
           <option value="Steak">Steak</option>
           <option value="Japanese">Japanese</option>
           <option value="Hawaiian">Hawaiian</option>
           <option value="American">American</option>
+          <option value="empty" selected></option>
         </select>
         <br>
       
@@ -113,36 +118,36 @@
 
 
     <section>
-      <h2>Update Restaurant Cuisine</h2>
+      <h3>Update Restaurant Cuisine</h3>
       <form action="/submit-form" method="post">
 
-        <label for="restaurant_CuisineID">Restaurant Cusine ID:</label><br>
+        <label for="restaurant_CuisineID">Restaurant Cusine ID:</label>
         <select for="restaurant_CuisineID" id="restaurant_CuisineID">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5">5</option>
+          <option value="5"selected>5</option>
         </select>
         <br>
           
-        <label for="restaurantID">Restaurant ID:</label><br>
+        <label for="restaurantID">Restaurant Name:</label>
         <select for="restaurantID" id="restaurantID">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value="1">Duke's Waikiki</option>
+          <option value="2">Iron grill Hawaii Food Truck</option>
+          <option value="3">Sushi Den</option>
+          <option value="4">Mercantile Dining & Provision</option>
+          <option value="5"selected>Flagstaff House</option>
         </select>
         <br>
-          
-        <label for="cuisineDescription">Type of Cuisine:</label><br>
+
+        <label for="cuisineDescription">Type of Cuisine:</label>
         <select for="cuisineDescription" id="cuisineDescription">
           <option value="Seafood">Seafood</option>
           <option value="Steak">Steak</option>
           <option value="Japanese">Japanese</option>
           <option value="Hawaiian">Hawaiian</option>
-          <option value="American">American</option>
+          <option value="American"selected>American</option>
         </select>
         <br>
           <input type="submit" value="Submit">

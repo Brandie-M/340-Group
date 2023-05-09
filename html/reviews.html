@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Reviews</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="../public/style.css">
 </head>
 <body>
 
@@ -24,21 +24,21 @@
 
     <h1>Reviews</h1>
 
-    <table>
+    <table border="1" padding="5">
 
       <thead>
 
         <tr>
-          <th>reviewID</th>
-          <th>reviewDate</th>
-          <th>reviewTitle</th>
-          <th>reviewDescription</th>
-          <th>reviewerRating</th>
-          <th>takesReservation</th>
-          <th>delivery</th>
-          <th>reviewerID</th>
-          <th>restaurantID</th>
-          <th>update</th>
+          <th>ReviewID</th>
+          <th>Review Date</th>
+          <th>Review Title</th>
+          <th>Review Description</th>
+          <th>Reviewer Rating</th>
+          <th>Takes Reservation</th>
+          <th>Offers Delivery</th>
+          <th>Reviewer Last Name</th>
+          <th>Restaurant Name</th>
+          <th>Update</th>
         </tr>
 
       </thead>
@@ -53,8 +53,8 @@
           <td>4.5</td>
           <td>Yes</td>
           <td>No</td>
-          <td>2</td>
-          <td>1</td>
+          <td>Wong</td>
+          <td>Duke's Waikiki</td>
           <td><a href="#">Update</a></td>
         </tr>
 
@@ -66,8 +66,8 @@
           <td>2</td>
           <td>Yes</td>
           <td>Yes</td>
-          <td>1</td>
-          <td>4</td>
+          <td>Smith</td>
+          <td>Mercantile Dining & Provisions</td>
           <td><a href="#">Update</a></td>
         </tr>
 
@@ -81,8 +81,8 @@
           <td>5</td>
           <td>Yes</td>
           <td>No</td>
-          <td>2</td>
-          <td>2</td>
+          <td>Wong</td>
+          <td>Iron grill Hawaii Food Truck</td>
           <td><a href="#">Update</a></td>
         </tr>
       
@@ -102,6 +102,7 @@
           <option value="3">Sushi Den</option>
           <option value="4">Mercantile Dining & Provisions</option>
           <option value="4">Flagstaff House</option>
+          <option value="empty" selected></option>
         </select><br>    
         
         <label for="reviewDate">Review Date:</label>
@@ -114,7 +115,7 @@
         <textarea 
           id="reviewDescription"
           name="reviewDescription"
-          rows="1" cols="35"></textarea><br>
+          rows="10" cols="35"></textarea><br>
 
         <label for="reviewerRating">Reviewer Rating:</label>
         <input type="text" id="reviewerRating" name="reviewerRating"><br>
@@ -125,8 +126,14 @@
         <label for="delivery">Delivery:</label>
         <input type="text" id="delivery" name="delivery"><br>
 
-        <label for="reviewerID">Reviewer ID:</label>
-        <input type="text" id="reviewerID" name="reviewerID"><br>
+        <label for="reviewerLastName">Reviewer Last Name:</label>
+        <select id="reviewerLastName" name="reviewerLastName">
+          <option value="1">Smith</option>
+          <option value="2">Wong</option>
+          <option value="3">Johnson</option>
+          <option value="4">Hernandez</option>
+          <option value="empty" selected></option>
+        </select><br>
          
 
         <input type="submit" value="Submit">
@@ -139,28 +146,30 @@
       <h2>Update Review</h2>
       <form action="/submit-form" method="post">
           <label for="reviewID">Review ID:</label>
-          <input type="text" id="reviewID" name="reviewID"><br>
+          <input type="text" id="reviewID" name="reviewID" value="3"><br>
         
           <label for="reviewDate">Review Date:</label>
-          <input type="date" id="reviewDate" name="reviewDate"><br>
+          <input type="date" id="reviewDate" name="reviewDate" value="2022-05-10"><br><br>
         
           <label for="reviewTitle">Review Title:</label>
-          <input type="text" id="reviewTitle" name= "reviewTitle" ><br>
+          <input type="text" id="reviewTitle" name= "reviewTitle" value="Fantastic experience"><br>
         
           <label for="reviewDescription">Review Description:</label>
           <textarea 
           id="reviewDescription"
           name="reviewDescription"
-          rows="1" cols="35"></textarea><br>
+          rows="10" cols="35"
+          >Iron Grill Hawaii food truck is a hidden gem in Honolulu. The food is exceptional, and the service is top-notch. From the moment we placed our order, we felt welcomed and well taken care of. I highly recommend this food truck to anyone looking for a delicious and memorable dining experience in Hawaii.
+        </textarea><br>
         
           <label for="reviewerRating">Reviewer Rating</label>
-          <input type="text" id="reviewerRating" name="reviewerRating"><br>
+          <input type="text" id="reviewerRating" name="reviewerRating" value="5"><br>
         
           <label for="takesReservation">Takes Reservation:</label>
-          <input type="text" id="takesReservation" name="takesReservation"><br>
+          <input type="text" id="takesReservation" name="takesReservation" value="Yes"><br>
         
           <label for="delivery">Delivery:</label>
-          <input type="text" id="delivery" name="delivery"><br>
+          <input type="text" id="delivery" name="delivery" value="No"><br>
            
 
           <input type="submit" value="Submit">

@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Expenses</title>
-  <link rel="stylesheet" src="style.css">
+  <link rel="stylesheet" href="../public/style.css">
 </head>
 <body>
 
@@ -23,9 +23,9 @@
     <h1>Expenses</h1>
 
     <section>
-      <h2>Browse Expenses</h2>
+      <h3>Browse Expenses</h3>
 
-      <table>
+      <table border="1" padding="5">
         <thead>
           <tr>
             <th>Expense ID</th>
@@ -80,14 +80,14 @@
     </section>
 
     <section>
-      <h2>Add New Expense</h2>
+      <h3>Add New Expense</h3>
       <form action="/submit-form" method="post">
               
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date"><br>
+        <input type="date" id="date" name="date"><br><br>
       
         <label for="totalExpense">Total Expense:</label>
-        <input type="number" id="totalExpense" name="totalExpense"><br>
+        <input type="number" id="totalExpense" name="totalExpense"><br><br>
       
         <label for="description">Description:</label>
         <input type="text" id="description" name="description"><br>
@@ -102,6 +102,7 @@
           <option value="2">Wong</option>
           <option value="3">Johnson</option>
           <option value="4">Hernandez</option>
+          <option value="empty" selected></option>
         </select><br>
 
         <label for="reviewID">Review Number:</label>
@@ -109,6 +110,7 @@
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
+          <option value="empty" selected></option>
         </select><br>
       
         <input type="submit" value="Submit">

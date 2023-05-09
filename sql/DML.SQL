@@ -43,7 +43,10 @@ VALUES (:nameInput, :streetAddressInput, :cityInput, :stateInput, :zipCodeInput,
 
 
 -- Update
-
+UPDATE Restaurants 
+SET name = :nameInput, streetAddress = :streetAddressInput, city = :cityInput, state = :stateInput, zipCode = :zipCodeInput, 
+        phoneNumber = :phoneNumberInput, website = :websiteInput 
+WHERE restaurantID = :restaurantIDInput;
 
 
 -- Delete One
@@ -71,7 +74,7 @@ JOIN Restaurants ON Restaurant_has_Cuisines.restaurantID = Restaurants.restauran
 
 
 -- Insert New
-INSERT into Restaurant_has_Cuisines (restaurant_cuisineID, cuisineID, restaurantID)
+INSERT into Restaurant_has_Cuisines (cuisineID, restaurantID)
 VALUES (:cuisineIDinput, :restaurantIDinput);
 
 
@@ -120,10 +123,14 @@ ORDER BY Reviews.reviewDate desc;
 
 -- Insert New
 INSERT INTO Reviews (reviewDate, reviewTitle, reviewDescription, reviewerRating, takesReservation, delivery, reviewerID, restaurantID)
-VALUES (:reviewDateInput, :reviewTitleInput, :reviewDescriptionInput, :reviewerRatingInput, :takesReservationInput, :deliveryInput, :reviewerIDInput, :restaurantIDInput);
+VALUES (:reviewDateInput, :reviewTitleInput, :reviewDescriptionInput, :reviewerRatingInput, :takesReservationInput, :deliveryInput, :reviewerID_from_dropdown_Input, :restaurantID_from_dropdown_Input);
 
 -- Update Existing
-UPDATE Reviews SET reviewDate = :reviewDateInput, reviewTitle = :reviewTitleInput, reviewDescription = :reviewDescriptionInput, reviewerRating = :reviewerRatingInput, takesReservation = :takesReservationInput, delivery = :deliveryInput WHERE reviewID = :reviewIDInput;
+------ Note, we do not want the user to be able to update the reviewer or restaurant once a review is submitted so those fields are not included in the update query. 
+-------The only updates to those fields will happen if the reviewer or restaurant is deleted, field will update to NULL.
+UPDATE Reviews SET reviewDate = :reviewDateInput, reviewTitle = :reviewTitleInput, reviewDescription = :reviewDescriptionInput, 
+        reviewerRating = :reviewerRatingInput, takesReservation = :takesReservationInput, delivery = :deliveryInput
+WHERE reviewID = :reviewIDInput;
 
 
 -----------------------------
@@ -139,3 +146,5 @@ JOIN Reviewers ON Expenses.reviewerID = Reviewers.reviewerID;
 
 
 -- Insert New
+INSERT INTO Expenses (date, totalExpense, description, expenseStatus, reviewerID, reviewID)
+VALUES (:dateInput, :totalExpenseInput, :descriptionInput, :expenseStatusInput, :reviewerID_from_dropdown_Input, :reviewID_from_dropdown_input);

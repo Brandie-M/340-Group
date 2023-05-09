@@ -58,6 +58,9 @@ app.get('/expenses', function(req, res) {
     
 });
 
+// Hoping this will help with the css
+app.use(express.static(path.join(__dirname, '../public')))
+
 
 
 
