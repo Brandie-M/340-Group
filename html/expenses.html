@@ -93,8 +93,12 @@
         <input type="text" id="description" name="description"><br>
       
         <label for="expenseStatus">Status:</label>
-        <input type="text" id="expenseStatus" name="expenseStatus" value="Pending"><br>
-      
+        <select> id="expenseStatus" name="expenseStatus"
+          <option value="Rejected">Rejected</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Paid">Paid</option>
+        </select> <br>
       
         <label for="reviewerLastName">Reviewer Last Name:</label>
         <select id="reviewerLastName" name="reviewerLastName">
