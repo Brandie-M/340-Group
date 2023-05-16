@@ -30,8 +30,8 @@ SELECT reviewID FROM Reviews;
 -----------------------------
 -- Browse All
 ------Shows all attributes in table and displays the name of the price level from  Price_Levels
-SELECT Restaurants.restaurantID, Restaurants.name, Restaurants.streetAddress, Restaurants.city, 
-Restaurants.state, Restaurants.zipCode, Restaurants.phoneNumber, Restaurants.website, Price_Levels.priceRange as Price_Levels
+SELECT Restaurants.restaurantID as "Restaurant ID", Restaurants.name as 'Name', Restaurants.streetAddress as 'Street Address', Restaurants.city as 'City', 
+Restaurants.state as 'State', Restaurants.zipCode as 'Zip Code', Restaurants.phoneNumber as 'Phone Number', Restaurants.website as 'Website', Price_Levels.priceRange as 'Price Range'
 FROM Restaurants
 JOIN Price_Levels ON Restaurants.priceID = Price_Levels.priceID;
 
@@ -56,7 +56,8 @@ DELETE FROM Restaurants WHERE restaurantID= :restaurantID_selected_from_browse;
 -- Cuisines --
 -----------------------------
 -- Browse All
-SELECT * from Cuisines;
+SELECT cuisineID as 'Cuisine ID', cuisineDescription as 'Description' 
+from Cuisines;
 
 
 -- Insert New
@@ -67,7 +68,7 @@ VALUES (:cuisineDescriptionInput);
 -- Restaurant_has_Cuisines --
 -----------------------------
 -- Browse All
-SELECT Restaurant_has_Cuisines.restaurant_cuisineID, Cuisines.cuisineDescription as Cuisine_Name, Restaurants.name as Restaurant_Name
+SELECT Restaurant_has_Cuisines.restaurant_cuisineID as 'ID', Cuisines.cuisineDescription as 'Cuisine Name', Restaurants.name as 'Restaurant Name'
 FROM Restaurant_has_Cuisines
 JOIN Cuisines ON Restaurant_has_Cuisines.cuisineID = Cuisines.cuisineID
 JOIN Restaurants ON Restaurant_has_Cuisines.restaurantID = Restaurants.restaurantID;
@@ -89,7 +90,8 @@ DELETE FROM Restaurant_has_Cuisines WHERE restaurant_cuisineID = :restaurant_cui
 -- Price Levels --
 -----------------------------
 -- Browse All
-SELECT * FROM Price_Levels;
+SELECT priceID as 'Price ID', priceRange as 'Price Range' 
+FROM Price_Levels;
 
 
 -- Insert New
@@ -102,7 +104,9 @@ VALUES (:priceID_Input, :priceRange_Input);
 -- Reviewers --
 -----------------------------
 -- Browse All
-SELECT * from Reviewers;
+SELECT reviewerID as 'Reviewer ID', firstName as 'First Name', lastName as 'Last Name', phoneNumber as 'Phone Number', streetAddress as 'Street Address', 
+        city as 'City', state as 'state', zipCode as 'Zip Code', emailAddress as 'Email Address'
+from Reviewers;
 
 
 -- Insert New
@@ -114,8 +118,8 @@ VALUES (:firstNameInput, :lastNameInput, :phoneNumberInput, :streetAddressInput,
 -- Reviews --
 -----------------------------
 -- Browse All
-SELECT Reviews.reviewID, Reviews.reviewDate, Reviews.reviewTitle, Reviews.reviewDescription, Reviews.reviewerRating, 
-Reviews.takesReservation, Reviews.delivery, Reviewers.lastName as Reviewer_Last_Name, Restaurants.name as Restaurant_Name
+SELECT Reviews.reviewID as 'Review ID', Reviews.reviewDate as 'Review Date', Reviews.reviewTitle as 'Review Title', Reviews.reviewDescription as 'Review Description', Reviews.reviewerRating as 'Reviewer Rating', 
+Reviews.takesReservation as 'Takes Reservation', Reviews.delivery as "Offers Delivery", CONCAT(Reviewers.lastName, '-', Reviewers.reviewerID) as 'Reviewer Name and ID', Restaurants.name as 'Restaurant Name'
 FROM Reviews
 JOIN Reviewers ON Reviews.reviewerID = Reviewers.reviewerID
 JOIN Restaurants ON Reviews.restaurantID = Restaurants.restaurantID
@@ -139,8 +143,8 @@ WHERE reviewID = :reviewIDInput;
 -- Browse All
 ------ Note, chose to leave the reviewID as the ID number instead of adding the review name. 
 -------Similar to referencing an invoice id rather than the items in an order.
-SELECT Expenses.expenseID, Expenses.date, Expenses.totalExpense, Expenses.description, 
-Expenses.expenseStatus, Reviewers.lastName as Reviewer_Last_Name, Expenses.reviewID
+SELECT Expenses.expenseID as 'Expense ID', Expenses.date as 'Date', Expenses.totalExpense as 'Total Expense', Expenses.description as 'Description', 
+Expenses.expenseStatus as 'Status', CONCAT(Reviewers.lastName, '-', Reviewers.reviewerID) as 'Reviewer Last Name & ID', Expenses.reviewID as 'Review ID'
 FROM Expenses
 JOIN Reviewers ON Expenses.reviewerID = Reviewers.reviewerID;
 
