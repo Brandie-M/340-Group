@@ -94,29 +94,31 @@
       
         <label for="expenseStatus">Status:</label>
         <select> id="expenseStatus" name="expenseStatus"
-          <option value="Rejected">Rejected</option>
+          <option value=""></option>
           <option value="Pending">Pending</option>
           <option value="Approved">Approved</option>
           <option value="Paid">Paid</option>
+          <option value="Rejected">Rejected</option>
         </select> <br>
-      
-        <label for="reviewerLastName">Reviewer Last Name:</label>
-        <select id="reviewerLastName" name="reviewerLastName">
-          <option value="1">Smith</option>
-          <option value="2">Wong</option>
-          <option value="3">Johnson</option>
-          <option value="4">Hernandez</option>
-          <option value="empty" selected></option>
-        </select><br>
 
-        <label for="reviewID">Review Number:</label>
+        <label for="reviewID"> Reviewer Last Name & ID:</label>
         <select id="reviewID" name="reviewID">
+          <option value=""></option>
+          <option value="1">Smith-1</option>
+          <option value="2">Wong-2</option>
+          <option value="3">Johnson-3</option>
+          <option value="4">Hernandez-4</option>
+        </select><br>
+      
+        <label for="reviewID"> Review ID (Note: Use the Review ID from the review that you created):</label>
+        <select id="reviewID" name="reviewID">
+          <option value=""></option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="empty" selected></option>
+          <option value="4">4</option>
         </select><br>
-      
+
         <input type="submit" value="Submit">
       </form>
     </section>
