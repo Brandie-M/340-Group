@@ -1,0 +1,49 @@
+
+<h1>Cuisines</h1>
+
+<div>
+    <h3>Browse Cuisines</h3>
+    {{!-- Create a table --}}
+    <table>
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the following in order --}}
+            {{#each data}}
+            <tr>
+                <td>{{this.cuisineID}}</td>
+                <td>{{this.cuisineDescription}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <br>
+</div>
+
+<div>
+    <h3>Add New Cuisine</h3>
+
+    <form action="/submit-form" method="post">
+    
+    <label for="cuisineDescription">Cuisine Description:</label>
+    <input type="text" id="cuisineDescription" name="cuisineDescription"><br>
+
+    
+    <input type="submit" value="Submit">
+    </form>
+</div>

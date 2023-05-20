@@ -1,0 +1,170 @@
+{{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+<h1>Restaurants</h1>
+
+<div>
+    <h3>Browse Restaurants</h3>
+    {{!-- Create a table --}}
+    <table id="restaurant-table">
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+                <th>delete</th>
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the following in order --}}
+            {{#each data}}
+            <tr data-value={{this.restaurantID}}>
+                <td>{{this.restaurantID}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.streetAddress}}</td>
+                <td>{{this.city}}</td>
+                <td>{{this.state}}</td>
+                <td>{{this.zipCode}}</td>
+                <td>{{this.phoneNumber}}</td>
+                <td>{{this.website}}</td>
+                <td>{{this.priceID}}</td>
+                <td><button onclick="deleteRestaurant({{this.restaurantID}})">Delete</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table> 
+    <script src="./js/delete_restaurant.js"></script>
+    <br>
+</div>
+
+<div>
+    <h3>Add Restaurant</h3>
+
+    {{!<form id="add-restaurant-form-ajax">}}
+    <form id="add-restaurant-form" method="POST" action="/add-restaurant-form">
+
+        <p>To add a new restaurant, complete the form and hit submit.</p>
+        <p>Required fields outlined in red.</p>
+
+        <label for="nameInput">Name: </label>
+        <input type="text" name="nameInput" id="nameInput" required>
+
+        <label for="streetAddressInput">Street Address: </label>
+        <input type="text" name="streetAddressInput" id="streetAddressInput">
+        
+        <label for="cityInput">City:</label>
+        <input type="text" name="cityInput" id="cityInput" required>
+        
+        <label for="stateInput">State:</label>
+        <input type="text" name="stateInput" id="stateInput" required>
+        
+        <label for="zipCodeInput">Zip Code:</label>
+        <input type="text" name="zipCodeInput" id="zipCodeInput" >
+        
+        <label for="phoneNumberInput">Phone Number:</label>
+        <input type="text" name="phoneNumberInput" id="phoneNumberInput" >
+        
+        <label for="websiteInput">Website:</label>
+        <input type="text" name="websiteInput" id="websiteInput" >
+
+        {{!<label for="priceIDInput">Price Range:</label>
+        <input type="text" name="priceIDInput" id="priceIDInput" > }}
+        
+        <label for="priceIDInput">Price Range</label>
+        <select id="priceIDInput" name="priceIDInput" required>
+            <option value="">Select a Price Range</option>
+            {{#each price_levels}}
+            <option value="{{this.priceID}}">{{this.priceRange}}</option>
+            {{/each}}
+        </select>
+        
+        <input type="submit">
+    </form>
+
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    {{!<script src="./js/add_restaurant.js"></script>}}
+
+
+        
+</div>
+
+<div>
+    <h3>Update an Existing Restaurant</h3>
+    <form id="update-restaurant-form-ajax">
+    <p>To update an existing restaurant, choose a restaurant from the dropdown.</p>
+    <label for="nameInput">Name </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select a Person</option>
+        {{#each data}}
+        <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-homeworld">Homeworld: </label>
+    <select name="input-homeworld" id="input-homeworld-update">
+        <option>Select a Planet</option>
+        {{#each planets}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_restaurant.js"></script>
+</div>
+
+
+
+{{!
+<div>
+    <h3>Update Restaurant</h3>
+    <form action="/submit-form" method="post">
+        <label for="restaurantID">Restaurant ID:</label>
+        <input type="text" id="restaurantID" name="restaurantID" value="3"><br>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="Sushi Den"><br>
+        
+        <label for="streetAddress">Street Address:</label>
+        <input type="text" id="streetAddress" name="streetAddress" value="1487 S Pearl St"><br>
+        
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" value="Denver"><br>
+        
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" value="CO"><br>
+        
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" value="80210"><br>
+        
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" value="(303) 777-0826"><br>
+        
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website" value="https://www.sushiden.net/"><br>
+        
+        <label for="priceID">Price Range</label>
+        <select id="priceID" name="priceID">
+            <option value="$">$1-10</option>
+            <option value="$$">$10-30</option>
+            <option value="$$$" selected>$30-60</option>
+            <option value="$$$$">$60-100</option>
+            <option value="$$$$$">$100+</option>
+            </select> <br>
+        
+        <input type="submit" value="Submit">
+        </form>
+</div>}}
