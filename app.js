@@ -27,6 +27,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 
 // Database
 var db = require('./database/db-connector');
+const { prependOnceListener } = require('process');
 
 
 /*******************************
@@ -46,10 +47,16 @@ app.get('/', function(req, res)
 // Restaurants page
 //------------------
 // render the page and create query for dropdown -- 
+
 app.get('/restaurants', function(req, res)
     {  
         // Declare Query 1
-        let query1 = "SELECT * FROM Restaurants;";
+        let query1 = `SELECT Restaurants.restaurantID, Restaurants.name, Restaurants.streetAddress,
+                    Restaurants.city, Restaurants.state, Restaurants.zipCode, Restaurants.phoneNumber, Restaurants.website, 
+                    Price_Levels.priceRange as priceRange 
+                    FROM Restaurants
+                    INNER JOIN Price_Levels
+                    ON Restaurants.priceID = Price_Levels.priceID;`;
 
         // Query 2 is the same in both cases
         let query2 = "SELECT * FROM Price_Levels;";
@@ -70,6 +77,7 @@ app.get('/restaurants', function(req, res)
         })                                              
     });  
     // received back from the query
+
 
 //Add a new restaurant
 app.post('/add-restaurant-form', function(req, res){
@@ -119,8 +127,6 @@ app.post('/add-restaurant-form', function(req, res){
 app.delete('/delete-restaurant-ajax/', function(req,res,next){
     let data = req.body;
     let restaurantID = parseInt(data.id);
-    let deleteRestaurantCuisines = `DELETE FROM Restaurant_has_Cuisines WHERE restaurantID = ?`;
-    let deleteReviews= `DELETE FROM Reviews WHERE restaurantID = ?`;
     let deleteRestaurants= `DELETE FROM Restaurants WHERE restaurantID = ?`;
   
   
@@ -139,25 +145,92 @@ app.delete('/delete-restaurant-ajax/', function(req,res,next){
       
 
 
-// update a restaurant
-
-
 
 
 //-------------------------
 // Restaurant Cuisines page
 //------------------------- 
+
+// BROWSE 
 app.get('/restaurant_has_cuisines', function(req, res)
     {  
-        let query2a = 'Select * FROM Restaurant_has_Cuisines';               // Define our query
+        let query2a = `SELECT Restaurant_has_Cuisines.restaurant_cuisineID, 
+                    Cuisines.cuisineDescription as cuisine, Restaurants.name as restaurant 
+                    FROM Restaurant_has_Cuisines
+                    INNER JOIN Cuisines 
+                    ON Restaurant_has_Cuisines.cuisineID = Cuisines.cuisineID
+                    INNER JOIN Restaurants
+                    ON Restaurant_has_Cuisines.restaurantID = Restaurants.restaurantID;`;               // Define our query
+        let query2b = `SELECT * FROM Restaurants;`
+        let query2c = `SELECT * FROM Cuisines;`
 
         db.pool.query(query2a, function(error, rows, fields){    // Execute the query
 
-            res.render('restaurant_has_cuisines', {data: rows}); // Render the restaurant_has_cuisines.hbs file, and also send the renderer
+            let restaurantCuisines = rows;
+
+            db.pool.query(query2b, (error, rows, fields) => {
+                let restaurants = rows;
+
+                db.pool.query(query2c, (error, rows, fields) => {
+                    let cuisines = rows;
+                    return res.render('restaurant_has_cuisines', {data: restaurantCuisines, restaurants: restaurants, cuisines: cuisines});
+                })
+            })                                                  // Render the restaurant_has_cuisines.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
 
 
+
+
+// ADD NEW
+app.post('/add-restaurant-cuisine-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+
+        // Create the query and run it on the database
+    query1 = `INSERT INTO Restaurant_has_Cuisines (cuisineID, restaurantID) 
+                VALUES ('${data['cuisineIDInput']}', '${data['restaurantIDInput']}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our restaurants route, which automatically runs the SELECT * FROM Restaurants and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/restaurant_has_cuisines');
+        }
+    })
+    }); 
+
+
+// DELETE
+app.delete('/delete-restaurant-cuisine-ajax/', function(req,res,next){
+    let data = req.body;
+    let restaurant_cuisineID = parseInt(data.id);
+    let deleteRestaurantCuisines = `DELETE FROM Restaurant_has_Cuisines WHERE restaurant_cuisineID = ?`;
+ 
+  
+          // Run the query
+          db.pool.query(deleteRestaurantCuisines, [restaurant_cuisineID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else {
+                res.sendStatus(204);
+            }
+              
+            })});
 
 
 //-------------------------

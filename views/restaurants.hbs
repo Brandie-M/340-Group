@@ -1,6 +1,5 @@
 {{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
 <h1>Restaurants</h1>
@@ -24,7 +23,7 @@
                 <th>Zip Code</th>
                 <th>Phone Number</th>
                 <th>Website</th>
-                <th>Price ID</th>
+                <th>Price Range</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -43,13 +42,13 @@
                 <td>{{this.zipCode}}</td>
                 <td>{{this.phoneNumber}}</td>
                 <td>{{this.website}}</td>
-                <td>{{this.priceID}}</td>
+                <td>{{this.priceRange}}</td>
                 <td><button onclick="deleteRestaurant({{this.restaurantID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table> 
-    <script src="./js/delete_restaurant.js"></script>
+    <script src="../public/js/delete_restaurant.js"></script>
     <br>
 </div>
 
@@ -97,8 +96,6 @@
         <input type="submit">
     </form>
 
-    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-    {{!<script src="./js/add_restaurant.js"></script>}}
 
 
         

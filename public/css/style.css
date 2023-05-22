@@ -48,10 +48,6 @@ a:hover {
   text-decoration: underline;
 }
 
-p {
-  width: 80%;
-}
-
 
 .container {
   max-width: 960px;
@@ -159,4 +155,12 @@ label {
 label[for="required"]::after {
   content: "*";
   color: red;
+}
+
+.homepage-section {
+  background-color: #f2f2f2;
+  padding: 12px; 
+  border-radius: 5px;
+  width: 60%;
+  margin-bottom: 10px;
 }

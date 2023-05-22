@@ -1,9 +1,12 @@
+{{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
+
+
 <h1>Restaurant Cuisines</h1>
 
 <div>
     <h3>Browse</h3>
     {{!-- Create a table --}}
-    <table>
+    <table id="restaurant-cusines-table">
 
         {{!-- Header section --}}
         <thead>
@@ -11,11 +14,10 @@
             {{!-- For just the first row, we print each key of the row object as a header cell so we
             know what each column means when the page renders --}}
             <tr>
-                {{#each data.[0]}}
-                <th>
-                    {{@key}}
-                </th>
-                {{/each}}
+                <th>Restaurant Cuisine ID</th>
+                <th>Cuisine Name</th>
+                <th>Restaurant Name</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -24,52 +26,52 @@
 
             {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
             {{#each data}}
-            <tr>
+            <tr data-value={{this.restaurant_cuisineID}}>
                 <td>{{this.restaurant_cuisineID}}</td>
-                <td>{{this.cuisineID}}</td>
-                <td>{{this.restaurantID}}</td>
+                <td>{{this.cuisine}}</td>
+                <td>{{this.restaurant}}</td>
+                <td><button onclick="deleteRestaurantCuisines({{this.restaurant_cuisineID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+    <script src="../public/js/delete_restaurant_cuisines.js"></script>
     <br>
 </div>
 
+
+
 <div>
     <h3>Add Cuisine to Restaurant</h3>
-    <form action="/submit-form" method="post">
+    <form id="add-restaurant-cuisine-form" action="/add-restaurant-cuisine-form" method="POST">
+        <p>To associate a cuisine with a restaurant, complete the form and hit submit.</p>
 
-    <label for="restaurant_name">Restaurant Name:</label>
-    <select for="restaurant_name" id="restaurant_name">
-        <option value="1">Duke's Waikiki</option>
-        <option value="2">Iron grill Hawaii Food Truck</option>
-        <option value="3">Sushi Den</option>
-        <option value="4">Mercantile Dining & Provision</option>
-        <option value="5">Flagstaff House</option>
-        <option value="empty" selected></option>
-    </select>
-    <br>
-    
-    <label for="cuisineDescription">Type of Cuisine:</label>
-    <select for="cuisineDescription" id="cuisineDescription">
-        <option value="Seafood">Seafood</option>
-        <option value="Steak">Steak</option>
-        <option value="Japanese">Japanese</option>
-        <option value="Hawaiian">Hawaiian</option>
-        <option value="American">American</option>
-        <option value="empty" selected></option>
-    </select>
+        <label for="restaurantIDInput">Restaurant Name</label>
+        <select id="restaurantIDInput" name="restaurantIDInput" required>
+            <option value="">Select a Restaurant</option>
+            {{#each restaurants}}
+            <option value="{{this.restaurantID}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <label for="cuisineIDInput">Cuisine Name</label>
+        <select id="cuisineIDInput" name="cuisineIDInput" required>
+            <option value="">Select a Cuisine</option>
+            {{#each cuisines}}
+            <option value="{{this.cuisineID}}">{{this.cuisineDescription}}</option>
+            {{/each}}
+        </select>
     <br>
     
 
-    <input type="submit" value="Submit">
+    <input type="submit">
     </form>
     <br>
 </div>
 
 
 <div>
-    <h3>Update Restaurant Cuisine</h3>
+    <h3>Update Restaurant Cuisine [STATIC]</h3>
     <form action="/submit-form" method="post">
 
     <label for="restaurant_CuisineID">Restaurant Cusine ID:</label>
