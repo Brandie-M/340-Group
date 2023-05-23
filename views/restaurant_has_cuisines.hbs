@@ -47,7 +47,7 @@
         <p>To associate a cuisine with a restaurant, complete the form and hit submit.</p>
 
         <label for="restaurantIDInput">Restaurant Name</label>
-        <select id="restaurantIDInput" name="restaurantIDInput" required>
+        <select id="addRestaurantIDInput" name="restaurantIDInput" required>
             <option value="">Select a Restaurant</option>
             {{#each restaurants}}
             <option value="{{this.restaurantID}}">{{this.name}}</option>
@@ -55,7 +55,7 @@
         </select>
 
         <label for="cuisineIDInput">Cuisine Name</label>
-        <select id="cuisineIDInput" name="cuisineIDInput" required>
+        <select id="addCuisineIDInput" name="cuisineIDInput" required>
             <option value="">Select a Cuisine</option>
             {{#each cuisines}}
             <option value="{{this.cuisineID}}">{{this.cuisineDescription}}</option>
@@ -71,38 +71,41 @@
 
 
 <div>
-    <h3>Update Restaurant Cuisine [STATIC]</h3>
-    <form action="/submit-form" method="post">
+    <h3>Update Restaurant Cuisine</h3>
+    <form>
 
     <label for="restaurant_CuisineID">Restaurant Cusine ID:</label>
-    <select for="restaurant_CuisineID" id="restaurant_CuisineID">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5"selected>5</option>
+    <select id="updateRestaurant_CuisineID" name="restaurant_CuisineID">
+        <option value="">Select Restaurant Cuisine ID</option>
+        {{#each data}}
+        <option value="{{this.restaurant_cuisineID}}">{{this.restaurant_cuisineID}}</option>
+        {{/each}}
     </select>
+
     <br>
         
-    <label for="restaurantID">Restaurant Name:</label>
-    <select for="restaurantID" id="restaurantID">
-        <option value="1">Duke's Waikiki</option>
-        <option value="2">Iron grill Hawaii Food Truck</option>
-        <option value="3">Sushi Den</option>
-        <option value="4">Mercantile Dining & Provision</option>
-        <option value="5"selected>Flagstaff House</option>
+    <label for="restaurantIDInput">Restaurant Name</label>
+    <select id="updateRestaurantIDInput" name="restaurantIDInput" required>
+        <option value="">Select a Restaurant</option>
+        {{#each restaurants}}
+        <option value="{{this.restaurantID}}">{{this.name}}</option>
+        {{/each}}
     </select>
+    
     <br>
 
-    <label for="cuisineDescription">Type of Cuisine:</label>
-    <select for="cuisineDescription" id="cuisineDescription">
-        <option value="Seafood">Seafood</option>
-        <option value="Steak">Steak</option>
-        <option value="Japanese">Japanese</option>
-        <option value="Hawaiian">Hawaiian</option>
-        <option value="American"selected>American</option>
+    <label for="cuisineIDInput">Cuisine Name</label>
+    <select id="updateCuisineIDInput" name="cuisineIDInput" required>
+        <option value="">Select a Cuisine</option>
+        {{#each cuisines}}
+        <option value="{{this.cuisineID}}">{{this.cuisineDescription}}</option>
+        {{/each}}
     </select>
+
     <br>
-        <input type="submit" value="Submit">
+
+        <button onclick="updateRestaurantCuisines()">Update</button>
     </form>
+    <script src="../public/js/update_restaurant_cuisines.js"></script>
+
 </div>

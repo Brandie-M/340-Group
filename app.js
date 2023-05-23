@@ -13,8 +13,8 @@ var app     = express();            // Need to instantiate an express object to 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 27491;                 // Port number (BRANDIE)
-//PORT        = 9181;                 // Port number (JOANA)
+//PORT        = 27491;                 // Port number (BRANDIE)
+PORT        = 11717;                 // Port number (JOANA)
 
 
 // Handlebars
@@ -232,6 +232,34 @@ app.delete('/delete-restaurant-cuisine-ajax/', function(req,res,next){
               
             })});
 
+//UPDATE
+app.put('/update-restaurant-cuisine-ajax/', function(req,res,next){
+    const data = req.body;
+    const restaurant_cuisineID = parseInt(data.id);
+    const cuisineIDInput = parseInt(data.cuisineIDInput);
+    const restaurantIDInput = parseInt(data.restaurantIDInput);
+
+
+    const updateRestaurantCuisines = `UPDATE Restaurant_has_Cuisines SET cuisineID = ${cuisineIDInput}, restaurantID = ${restaurantIDInput} WHERE restaurant_cuisineID = ${restaurant_cuisineID}`;
+ 
+  
+          // Run the query
+          db.pool.query(updateRestaurantCuisines, function(error, rows, fields){
+            if (error) {
+
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+    
+            // If there was no error, we redirect back to our restaurants route, which automatically runs the SELECT * FROM Restaurants and
+            // presents it on the screen
+            else
+            {
+                res.redirect('/restaurant_has_cuisines');
+            }
+              
+            })});
 
 //-------------------------
 //  Cuisines page
