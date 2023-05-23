@@ -264,6 +264,8 @@ app.put('/update-restaurant-cuisine-ajax/', function(req,res,next){
 //-------------------------
 //  Cuisines page
 //------------------------- 
+
+//  BROWSE
 app.get('/cuisines', function(req, res)
     {  
         let query3a = 'Select * FROM Cuisines';                 // Define our query
@@ -274,6 +276,35 @@ app.get('/cuisines', function(req, res)
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
 
+
+// ADD NEW
+//Add a new cuisine
+app.post('/add-cuisine-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+query1 = `INSERT INTO Cuisines (cuisineDescription) 
+            VALUES ('${data['cuisineDescriptionInput']}')`;
+
+db.pool.query(query1, function(error, rows, fields){
+
+    // Check to see if there was an error
+    if (error) {
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error)
+        res.sendStatus(400);
+    }
+
+    // If there was no error, we redirect back to our restaurants route, which automatically runs the SELECT * FROM Restaurants and
+    // presents it on the screen
+    else
+    {
+        res.redirect('/cuisines');
+    }
+})
+}); 
 
 
 //-------------------------

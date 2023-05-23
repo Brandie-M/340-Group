@@ -38,12 +38,12 @@
 <div>
     <h3>Add New Cuisine</h3>
 
-    <form action="/submit-form" method="post">
-    
-    <label for="cuisineDescription">Cuisine Description:</label>
-    <input type="text" id="cuisineDescription" name="cuisineDescription"><br>
+    <form id="add-cuisine-form" method="POST" action="/add-cuisine-form">
+    <p>Add a new cuisine below. Example: Vegetarian, Thai, Italian, etc.</p>
+    <label for="cuisineDescriptionInput">Cuisine Description:</label>
+    <input type="text" id="cuisineDescriptionInput" name="cuisineDescriptionInput"><br>
 
     
-    <input type="submit" value="Submit">
+    <input type="submit" value="Add New Cuisine">
     </form>
 </div>

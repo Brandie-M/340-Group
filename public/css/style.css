@@ -150,6 +150,7 @@ select[required] {
 
 label {
   margin-left: 10px;
+  font-weight: bold;
 }
 
 label[for="required"]::after {
