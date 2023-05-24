@@ -8,7 +8,7 @@ SET AUTOCOMMIT = 0;
 /* create Price_Levels entity */
 DROP TABLE IF EXISTS Price_Levels;
 CREATE TABLE Price_Levels(
-	priceID	        VARCHAR(5) 		NOT NULL UNIQUE,
+	priceID	        INT 		    NOT NULL AUTO_INCREMENT UNIQUE,
     priceRange	    VARCHAR(20) 	NOT NULL UNIQUE,           
     PRIMARY KEY		(priceID)
 );
@@ -24,9 +24,9 @@ CREATE TABLE Restaurants(
     zipCode     	VARCHAR(9)	    ,
     phoneNumber	    VARCHAR(15)	    ,
     website		    VARCHAR(254)	,
-    priceID         VARCHAR(5)      NOT NULL,             
+    priceID         INT             NOT NULL,             
     PRIMARY KEY		(restaurantID),
-    FOREIGN KEY     (priceID)     REFERENCES Price_Levels (priceID) ON DELETE RESTRICT
+    FOREIGN KEY     (priceID)       REFERENCES Price_Levels (priceID) ON DELETE CASCADE
 );
 
 /* create Cuisines entity */
@@ -105,11 +105,11 @@ Insert Data
 /* Restaurants sample data */
 INSERT INTO Restaurants (restaurantID, name, streetAddress, city, state, zipCode, phoneNumber, website, priceID)
 VALUES
-(1, 'Duke\'s Waikiki', '2335 Kalakaua Ave', 'Honolulu', 'HI', '96815', '(808) 922-2268', 'https://www.dukeswaikiki.com/', '$$$'),
-(2, 'Iron Grill Hawaii Food Truck', NULL, 'Honolulu', 'HI', '96815', '(808) 202-7939', NULL, '$$'),
-(3, 'Sushi Den', '1487 S Pearl St', 'Denver', 'CO', '80210', '(303) 777-0826', 'https://www.sushiden.net/', '$$$'),
-(4, 'Mercantile Dining & Provisions', '1701 Wynkoop St', 'Denver', 'CO', '80202', '(720) 460-3733', 'https://www.mercantiledenver.com/', '$$$$'),
-(5, 'Flagstaff House', '1138 Flagstaff Rd', 'Boulder', 'CO', '80302', '(303) 442-4640', 'https://www.flagstaffhouse.com/', '$$$$');
+(1, 'Duke\'s Waikiki', '2335 Kalakaua Ave', 'Honolulu', 'HI', '96815', '(808) 922-2268', 'https://www.dukeswaikiki.com/', 3),
+(2, 'Iron Grill Hawaii Food Truck', NULL, 'Honolulu', 'HI', '96815', '(808) 202-7939', NULL, 2),
+(3, 'Sushi Den', '1487 S Pearl St', 'Denver', 'CO', '80210', '(303) 777-0826', 'https://www.sushiden.net/', 3),
+(4, 'Mercantile Dining & Provisions', '1701 Wynkoop St', 'Denver', 'CO', '80202', '(720) 460-3733', 'https://www.mercantiledenver.com/', 4),
+(5, 'Flagstaff House', '1138 Flagstaff Rd', 'Boulder', 'CO', '80302', '(303) 442-4640', 'https://www.flagstaffhouse.com/', 4);
 
 
 
@@ -135,11 +135,11 @@ VALUES
 /* Price_Levels sample data */
 INSERT INTO Price_Levels (priceID, priceRange)
 VALUES
-('$', '$1-10'),
-('$$', '$10-30'),
-('$$$', '$30-60'),
-('$$$$', '$60-100'),
-('$$$$$', '$100+');
+(1, '$1-10'),
+(2, '$10-30'),
+(3, '$30-60'),
+(4, '$60-100'),
+(5, '$100+');
 
 
 
