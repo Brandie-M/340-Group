@@ -160,7 +160,8 @@ app.get('/restaurant_has_cuisines', function(req, res)
                     INNER JOIN Cuisines 
                     ON Restaurant_has_Cuisines.cuisineID = Cuisines.cuisineID
                     INNER JOIN Restaurants
-                    ON Restaurant_has_Cuisines.restaurantID = Restaurants.restaurantID;`;               // Define our query
+                    ON Restaurant_has_Cuisines.restaurantID = Restaurants.restaurantID
+                    ORDER BY Restaurant_has_Cuisines.restaurant_cuisineID;`;               // Define our query
         let query2b = `SELECT * FROM Restaurants;`
         let query2c = `SELECT * FROM Cuisines;`
 
@@ -256,7 +257,7 @@ app.put('/update-restaurant-cuisine-ajax/', function(req,res,next){
             // presents it on the screen
             else
             {
-                res.redirect('/restaurant_has_cuisines');
+                res.sendStatus(200);
             }
               
             })});
