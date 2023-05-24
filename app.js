@@ -13,8 +13,8 @@ var app     = express();            // Need to instantiate an express object to 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-//PORT        = 27491;                 // Port number (BRANDIE)
-PORT        = 11717;                 // Port number (JOANA)
+PORT        = 27491;                 // Port number (BRANDIE)
+//PORT        = 11717;                 // Port number (JOANA)
 
 
 // Handlebars
@@ -311,6 +311,8 @@ db.pool.query(query1, function(error, rows, fields){
 //-------------------------
 // Price Levels page
 //------------------------- 
+
+//  BROWSE
 app.get('/price_levels', function(req, res)
     {  
         let query4a = 'Select * FROM Price_Levels ORDER BY priceID';              // Define our query
@@ -322,10 +324,51 @@ app.get('/price_levels', function(req, res)
     });                                                         // received back from the query
 
 
+    // ADD NEW
+//Add a new price level
+app.post('/add-price-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+query1 = `INSERT INTO Price_Levels (priceRange) 
+            VALUES ('${data['priceRangeInput']}')`;
+
+db.pool.query(query1, function(error, rows, fields){
+
+    // Check to see if there was an error
+    if (error) {
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error)
+        res.sendStatus(400);
+    }
+
+    // If there was no error, we redirect back to our restaurants route, which automatically runs the SELECT * FROM Restaurants and
+    // presents it on the screen
+    else
+    {
+        res.redirect('/price_levels');
+    }
+})
+}); 
+
+
 
 //-------------------------
 // Reviews page
 //------------------------- 
+
+//  BROWSE
+app.get('/reviews', function(req, res)
+    {  
+        let query1 = 'Select * FROM Reviews';              // Define our query
+
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('reviews', {data: rows});           // Render the price_levels.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    });                                                         // received back from the query
 
 
 
@@ -334,6 +377,16 @@ app.get('/price_levels', function(req, res)
 // Reviewers page
 //------------------------- 
 
+//  BROWSE
+app.get('/reviewers', function(req, res)
+    {  
+        let query1 = 'Select * FROM Reviewers';              // Define our query
+
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('reviewers', {data: rows});           // Render the price_levels.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    });                                                         // received back from the query
 
 
 
@@ -342,52 +395,24 @@ app.get('/price_levels', function(req, res)
 // Expenses page
 //------------------------- 
 
-/*  These are the now unused HTML Routes
+//  BROWSE
+app.get('/expenses', function(req, res)
+    {  
+        let query1 = 'Select * FROM Expenses';              // Define our query
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/index.html'));
-    
-});
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-app.get('/restaurants', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/restaurants.html'));
-    
-});
-
-
-app.get('/restaurant_has_cuisines', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/restaurant_has_cuisines.html'));
-    
-});
+            res.render('expenses', {data: rows});           // Render the price_levels.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    });                                                         // received back from the query
 
 
-app.get('/cuisines', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/cuisines.html'));
-    
-});
-
-app.get('/price_levels', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/price_levels.html'));
-    
-});
-
-app.get('/reviews', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/reviews.html'));
-    
-});
-
-app.get('/reviewers', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/reviewers.html'));
-    
-});
 
 
-app.get('/expenses', function(req, res) {
-    res.sendFile(path.join(__dirname, '../html/expenses.html'));
-    
-});
 
-*/
+
+
+
 
 // CSS route
 app.use('/public', express.static(path.join(__dirname, '/public')))
