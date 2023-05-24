@@ -6,10 +6,12 @@ function updateRestaurantCuisines(event) {
     const restaurantCuisineIDSelect = document.getElementById("updateRestaurant_CuisineID");
     const restaurantCuisineID = restaurantCuisineIDSelect.value;
 
+    // Getting selected restaurant ID and name 
     const restaurantIDSelect = document.getElementById("updateRestaurantIDInput");
     const restaurantID = restaurantIDSelect.value;
     const restaurantName = restaurantIDSelect.options[restaurantIDSelect.selectedIndex].text;
 
+    // Getting selected cuisine ID and description
     const cuisineIDSelect = document.getElementById("updateCuisineIDInput");
     const cuisineID = cuisineIDSelect.value;
     const cuisineDescription = cuisineIDSelect.options[cuisineIDSelect.selectedIndex].text;
