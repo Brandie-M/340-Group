@@ -1,3 +1,4 @@
+{{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
 
 <h1>Price Levels</h1>
 
@@ -12,11 +13,8 @@
             {{!-- For just the first row, we print each key of the row object as a header cell so we
             know what each column means when the page renders --}}
             <tr>
-                {{#each data.[0]}}
-                <th>
-                    {{@key}}
-                </th>
-                {{/each}}
+                <th>Price ID</th>
+                <th>Price Range</th>
             </tr>
         </thead>
 
@@ -33,4 +31,18 @@
         </tbody>
     </table>
     <br>
+</div>
+
+<div>
+    <h3>Add New Price Level</h3>
+
+    <form id="add-price-form" method="POST" action="/add-price-form" required>
+    <p>Design Note: In a live setting, this entity would be considered a read only table with this form only visible to administrators.</p>
+
+    <label for="priceRangeInput">New Price Range:</label>
+    <input type="text" id="priceRangeInput" name="priceRangeInput" required><br>
+
+    
+    <input type="submit" value="Add New Price Range">
+    </form>
 </div>

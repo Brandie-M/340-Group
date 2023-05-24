@@ -29,6 +29,15 @@ header, footer {
   color: var(--green-accent);
 }
 
+button {
+  color: #fff;
+  background-color: #88ab75;
+  border:  #88ab75; 
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+
+}
 
 
 h1 {
@@ -135,6 +144,7 @@ section {
 
 form {
   background-color: #f2f2f2;
+  margin-bottom: 15px;
   width: 40%;
   padding: 10px;
   border-radius: 5px;

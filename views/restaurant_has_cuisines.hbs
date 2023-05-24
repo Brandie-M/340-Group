@@ -75,7 +75,7 @@
     <form>
 
     <label for="restaurant_CuisineID">Restaurant Cusine ID:</label>
-    <select id="updateRestaurant_CuisineID" name="restaurant_CuisineID">
+    <select id="updateRestaurant_CuisineID" name="restaurant_CuisineID" required>
         <option value="">Select Restaurant Cuisine ID</option>
         {{#each data}}
         <option value="{{this.restaurant_cuisineID}}">{{this.restaurant_cuisineID}}</option>
