@@ -3,13 +3,16 @@ body {
   font-size: 16px;
   color: #333;
   background-color: #fff;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 header, footer {
   background-color: #d3e0cc;
   border-radius: 10px;
-  padding: 5px;
-  margin: 0 0 25px 0;
+  padding: 10px;
+  margin: 0px 0px 25px 0;
+
 }
 
 .page-nav a {
@@ -33,10 +36,14 @@ button {
   color: #fff;
   background-color: #88ab75;
   border:  #88ab75; 
-  padding: 10px;
+  padding: 12px 20px;
   margin-left: 10px;
   border-radius: 5px;
 
+}
+
+button:hover {
+  background-color: #6c8a5c;
 }
 
 
@@ -103,11 +110,11 @@ table th {
 
 label {
   display: block;
-  margin-bottom: 3px;
 }
 
 input {
   margin: 10px;
+  margin-bottom: 30px;
 }
 
 input[type=text], select, textarea {
@@ -131,7 +138,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #88ab75;
+  background-color: #6c8a5c;
 }
 
 input[required] {
@@ -145,7 +152,7 @@ section {
 form {
   background-color: #f2f2f2;
   margin-bottom: 15px;
-  width: 40%;
+  width: 70%;
   padding: 10px;
   border-radius: 5px;
 }

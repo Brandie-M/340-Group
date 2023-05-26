@@ -10,6 +10,7 @@
 var express = require('express');   // We are using the express library for the web server
 var path = require('path');         // Requiring path to navigate directories
 var app     = express();            // Need to instantiate an express object to interact with the server in our code
+var helpers = require('handlebars-helpers')();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
@@ -46,37 +47,37 @@ app.get('/', function(req, res)
 //------------------
 // Restaurants page
 //------------------
-// render the page and create query for dropdown -- 
+    // render the page and create query for dropdown -- 
 
-app.get('/restaurants', function(req, res)
-    {  
-        // Declare Query 1
-        let query1 = `SELECT Restaurants.restaurantID, Restaurants.name, Restaurants.streetAddress,
-                    Restaurants.city, Restaurants.state, Restaurants.zipCode, Restaurants.phoneNumber, Restaurants.website, 
-                    Price_Levels.priceRange as priceRange 
-                    FROM Restaurants
-                    INNER JOIN Price_Levels
-                    ON Restaurants.priceID = Price_Levels.priceID;`;
+    app.get('/restaurants', function(req, res)
+        {  
+            // Declare Query 1
+            let query1 = `SELECT Restaurants.restaurantID, Restaurants.name, Restaurants.streetAddress,
+                        Restaurants.city, Restaurants.state, Restaurants.zipCode, Restaurants.phoneNumber, Restaurants.website, 
+                        Price_Levels.priceRange as priceRange 
+                        FROM Restaurants
+                        INNER JOIN Price_Levels
+                        ON Restaurants.priceID = Price_Levels.priceID;`;
 
-        // Query 2 is the same in both cases
-        let query2 = "SELECT * FROM Price_Levels;";
+            // Query 2 is the same in both cases
+            let query2 = "SELECT * FROM Price_Levels;";
 
-        // Run the 1st query
-        db.pool.query(query1, function(error, rows, fields){
-            
-            // Save the restaurants
-            let restaurants = rows;
-            
-            // Run the second query
-            db.pool.query(query2, (error, rows, fields) => {
+            // Run the 1st query
+            db.pool.query(query1, function(error, rows, fields){
                 
-                // Save the price levels
-                let price_levels = rows;
-                return res.render('restaurants', {data: restaurants, price_levels: price_levels});
-        })
-        })                                              
-    });  
-    // received back from the query
+                // Save the restaurants
+                let restaurants = rows;
+                
+                // Run the second query
+                db.pool.query(query2, (error, rows, fields) => {
+                    
+                    // Save the price levels
+                    let price_levels = rows;
+                    return res.render('restaurants', {data: restaurants, price_levels: price_levels});
+            })
+            })                                              
+        });  
+        // received back from the query
 
 
 //Add a new restaurant
@@ -361,15 +362,69 @@ db.pool.query(query1, function(error, rows, fields){
 
 //  BROWSE
 app.get('/reviews', function(req, res)
-    {  
-        let query1 = 'Select * FROM Reviews';              // Define our query
+{  
+    // Declare Query 1
+    let query1 = `SELECT  Reviews.reviewID, Reviews.reviewDate, Reviews.reviewTitle, Reviews.reviewDescription, Reviews.reviewerRating, 
+                            Reviews.takesReservation, Reviews.delivery, CONCAT(Reviewers.lastName, '-', Reviewers.reviewerID) as reviewerNameID, Restaurants.name as restaurantName
+                FROM Reviews
+                LEFT JOIN Reviewers ON Reviews.reviewerID = Reviewers.reviewerID
+                LEFT JOIN Restaurants ON Reviews.restaurantID = Restaurants.restaurantID;`;
 
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+    // Query 2 is the same in both cases
+    let query2 = "SELECT * FROM Restaurants;";
 
-            res.render('reviews', {data: rows});           // Render the price_levels.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query
+    // Query 3
+    let query3 = `SELECT * FROM Reviewers;`
 
+    // Run the 1st query
+    db.pool.query(query1, function(error, rows, fields){
+        
+        // Save the reviews
+        let reviews = rows;
+        
+        // Run the second query
+        db.pool.query(query2, (error, rows, fields) => {
+            
+            // Save the restaurants
+            let restaurants = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                //Save the reviewers
+                let reviewers = rows;
+                return res.render('reviews', {data: reviews, reviewers: reviewers, restaurants: restaurants});
+            })})})});  
+
+
+//ADD NEW REVIEW
+app.post('/add-review-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+query1 = `INSERT INTO Reviews (reviewDate, reviewTitle, reviewDescription, reviewerRating, takesReservation, delivery, reviewerID, restaurantID)
+            VALUES ('${data['reviewDateInput']}', '${data['reviewTitleInput']}', '${data['reviewDescriptionInput']}', '${data['reviewerRatingInput']}', 
+            '${data['takesReservationInput']}', '${data['deliveryInput']}', '${data['reviewerIDInput']}', '${data['restaurantIDInput']}');
+`;
+
+db.pool.query(query1, function(error, rows, fields){
+
+    // Check to see if there was an error
+    if (error) {
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error)
+        res.sendStatus(400);
+    }
+
+    // If there was no error, we redirect back to our restaurants route, which automatically runs the SELECT * FROM Restaurants and
+    // presents it on the screen
+    else
+    {
+        res.redirect('/reviews');
+    }
+})
+}); 
 
 
 
