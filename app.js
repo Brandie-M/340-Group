@@ -396,6 +396,27 @@ app.get('/reviews', function(req, res)
             })})})});  
 
 
+// DELETE
+app.delete('/delete-review-ajax/', function(req,res,next){
+    let data = req.body;
+    let reviewID = parseInt(data.id);
+    let deleteReviews= `DELETE FROM Reviews WHERE reviewID = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteReviews, [reviewID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              res.sendStatus(204)
+            })});
+
+
 //ADD NEW REVIEW
 app.post('/add-review-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
@@ -425,6 +446,33 @@ db.pool.query(query1, function(error, rows, fields){
     }
 })
 }); 
+
+
+
+// UPDATE REVIEW
+app.put("/put-review-ajax", function(req, res, next) {
+    let data = req.body;
+  
+    let reviewerID = data.reviewerID !== "NULL" ? parseInt(data.reviewerID) : null;
+    let rating = parseInt(data.reviewerRating);
+    let reservation = data.takesReservation === "NULL" ? null : data.takesReservation;
+    let delivery = data.delivery === "NULL" ? null : data.delivery;
+    let reviewID = parseInt(data.reviewID);
+  
+    let queryUpdateReview = `UPDATE Reviews SET reviewerRating = ?, takesReservation = ?, delivery = ?, reviewerID = ? WHERE reviewID = ?`;
+  
+    // Run the query to update the review
+    db.pool.query(queryUpdateReview, [rating, reservation, delivery, reviewerID, reviewID], function(error, rows, fields) {
+      if (error) {
+        console.log(error);
+        res.sendStatus(400);
+      } else {
+        res.sendStatus(200);
+      }
+    });
+  });
+  
+
 
 
 

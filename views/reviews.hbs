@@ -2,7 +2,7 @@
 
 
 <h1>Reviews</h1>
-
+  {{! BROWSE }}
   <div>
     <h3>Browse Reviews</h3>
     {{!-- Create a table --}}
@@ -23,6 +23,7 @@
                 <th>Delivery?</th>
                 <th>Reviewer Last Name + ID</th>
                 <th>Restaurant Name</th>
+                <th>Delete a Review</th>
             </tr>
         </thead>
 
@@ -41,6 +42,7 @@
                 <td>{{this.delivery}}</td>
                 <td>{{this.reviewerNameID}}</td>
                 <td>{{this.restaurantName}}</td>
+                <td><button onclick="deleteReview({{this.reviewID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
@@ -48,95 +50,113 @@
     <script src="../public/js/delete_review.js"></script> 
   </div>
 
-    <h3>Add New Review</h3>
 
-    <div>
+  {{! ADD NEW }}
+  <h3 id="#Add">Add New Review</h3>
 
-      <form id="add-review-form" method="POST" action="/add-review-form">
+  <div>
 
-        <p>To add a new review, complete the form and hit submit.</p>
-        <p>Required fields outlined in red.</p>
+    <form id="add-review-form" method="POST" action="/add-review-form">
 
-        <label for="restaurantIDInput">Restaurant Name</label>
-        <select id="restaurantIDInput" name="restaurantIDInput" required>
-            <option disabled selected value>Select a Restaurant to Review</option>
-            {{#each restaurants}}
-            <option value="{{this.restaurantID}}">{{this.name}}</option>
-            {{/each}}
-        </select>
+      <p>To add a new review, complete the form and hit submit.</p>
+      <p>Required fields outlined in red.</p>
 
-        <label for="reviewerIDInput">Reviewer Last Name and ID</label>
-        <select id="reviewerIDInput" name="reviewerIDInput" required>
-            <option disabled selected value>Select a Reviewer</option>
-            {{#each reviewers}}
-            <option value="{{this.reviewerID}}">{{this.lastName}}-{{this.reviewerID}}</option>
-            {{/each}}
-        </select>
+      <label for="restaurantIDInput">Restaurant Name</label>
+      <select id="restaurantIDInput" name="restaurantIDInput" required>
+          <option disabled selected value>Select a Restaurant to Review</option>
+          {{#each restaurants}}
+          <option value="{{this.restaurantID}}">{{this.name}}</option>
+          {{/each}}
+      </select>
 
-        <label for="nameInput">Name: </label>
-        <input type="text" name="nameInput" id="nameInput" required>
+      <label for="reviewerIDInput">Reviewer Last Name and ID</label>
+      <select id="reviewerIDInput" name="reviewerIDInput" required>
+          <option disabled selected value>Select a Reviewer</option>
+          {{#each reviewers}}
+          <option value="{{this.reviewerID}}">{{this.lastName}}-{{this.reviewerID}}</option>
+          {{/each}}
+      </select>
 
-        <label for="reviewDateInput">Review Date:</label>
-        <input type="date" id="reviewDateInput" name="reviewDateInput" required><br>
+      <label for="reviewDateInput">Review Date:</label>
+      <input type="date" id="reviewDateInput" name="reviewDateInput" required><br>
+    
+      <label for="reviewTitleInput">Review Title:</label>
+      <input type="text" id="reviewTitleInput" name="reviewTitleInput" required><br>
+
+      <label for="reviewDescriptionInput">Review:</label>
+      <textarea 
+        id="reviewDescriptionInput"
+        name="reviewDescriptionInput"
+        rows="10" cols="35"></textarea><br>
+
+      <label for="reviewerRatingInput">Rating between 1 (lowest) and 5 (highest): </label>
+      <input type="number" id="reviewerRatingInput" name="reviewerRatingInput" min="0" max="5" required><br>
+    
+      <label for="takesReservationInput">Takes Reservations?:</label>
+      <select id="takesReservationInput" name="takesReservationInput" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="" selected>Unknown</option>
+      </select>
       
-        <label for="reviewTitleInput">Review Title:</label>
-        <input type="text" id="reviewTitleInput" name="reviewTitleInput" required><br>
+      <label for="deliveryInput">Does the restaurant offer delivery?</label>
+      <select id="deliveryInput" name="deliveryInput" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="" selected>Unknown</option>
+      </select>
 
-        <label for="reviewDescriptionInput">Review:</label>
-        <textarea 
-          id="reviewDescriptionInput"
-          name="reviewDescriptionInput"
-          rows="10" cols="35"></textarea><br>
 
-        <label for="reviewerRatingInput">Rating between 1 (lowest) and 5 (highest): </label>
-        <input type="number" id="reviewerRatingInput" name="reviewerRatingInput" min="0" max="5" required><br>
       
-        <label for="takesReservationInput">Takes Reservations?:</label>
-        <input type="radio" id="Yes" name="takesReservationInput" value="Yes">Yes</input>
-        <input type="radio" id="No" name="takesReservationInput" value="No" checked>No</input>
-        <br>
+      <input type="submit" value="Submit New Review">
+    </form>
 
-        <label for="deliveryInput">Offers Delivery?:</label>
-        <input type="radio" id="Yes" name="deliveryInput" value="Yes">Yes</input>
-        <input type="radio" id="No" name="deliveryInput" value="No" checked>No</input>
-        <br>
-        
-        <input type="submit" value="Submit New Review">
+  </div>
+<br>
+<br>
+  {{! UPDATE }}
+  <div>
+    <h3 id="#Update">Update Review</h3>
+    <form id="update-review-form-ajax">
+
+      <label for="reviewIDInput">Review ID and Title:</label>
+      <select id="reviewIDInput" name="reviewIDInput" required>
+        <option disabled selected value="test">Select a Review by ID-Title: </option>
+        {{#each data}}
+        <option value="{{this.reviewID}}">{{this.reviewID}}-{{this.reviewTitle}}</option>
+        {{/each}}
+      </select> 
+      <p></p>   
+
+      <label for="reviewerIDInput">Reviewer Last Name and ID:</label>
+      <select id="reviewerID-update" name="reviewerIDInput" required>
+          <option disabled selected value>Select or Remove a Reviewer</option>
+          {{#each reviewers}}
+          <option value="{{this.reviewerID}}">{{this.lastName}}-{{this.reviewerID}}</option>
+          {{/each}}
+          <option value="NULL">NONE - Remove Reviewer from Review</option>
+      </select>       
+      
+      <label for="reviewerRatingInput">Rating between 1 (lowest) and 5 (highest): </label>
+      <input type="number" id="reviewerRating-update" name="reviewerRatingInput" min="0" max="5" required><br>
+    
+      <label for="takesReservationInput">Takes Reservations?:</label>
+      <select id="takesReservation-update" name="takesReservationInput" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="NULL" selected>Unknown</option>
+      </select>
+
+      <label for="deliveryInput">Does the restaurant offer delivery?:</label>
+      <select id="deliveryInput-update" name="deliveryInput" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="NULL" selected>Unknown</option>
+      </select>
+    
+          
+
+        <input type="submit" value="Save Changes">
       </form>
-
-    </div>
-
-
-    <div>
-      <h3>Update Review [ STATIC ]</h3>
-      <form action="/submit-form" method="post">
-          <label for="reviewID">Review ID:</label>
-          <input type="text" id="reviewID" name="reviewID" value="3"><br>
-        
-          <label for="reviewDate">Review Date:</label>
-          <input type="date" id="reviewDate" name="reviewDate" value="2022-05-10"><br><br>
-        
-          <label for="reviewTitle">Review Title:</label>
-          <input type="text" id="reviewTitle" name= "reviewTitle" value="Fantastic experience"><br>
-        
-          <label for="reviewDescription">Review Description:</label>
-          <textarea 
-          id="reviewDescription"
-          name="reviewDescription"
-          rows="10" cols="35"
-          >Iron Grill Hawaii food truck is a hidden gem in Honolulu. The food is exceptional, and the service is top-notch. From the moment we placed our order, we felt welcomed and well taken care of. I highly recommend this food truck to anyone looking for a delicious and memorable dining experience in Hawaii.
-        </textarea><br>
-        
-          <label for="reviewerRating">Reviewer Rating</label>
-          <input type="text" id="reviewerRating" name="reviewerRating" value="5"><br>
-        
-          <label for="takesReservation">Takes Reservation:</label>
-          <input type="text" id="takesReservation" name="takesReservation" value="Yes"><br>
-        
-          <label for="delivery">Delivery:</label>
-          <input type="text" id="delivery" name="delivery" value="No"><br>
-           
-
-          <input type="submit" value="Submit">
-        </form>
+      <script src="../public/js/update_review.js"></script>
   </div>
