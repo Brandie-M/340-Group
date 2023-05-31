@@ -54,10 +54,12 @@ updateReviewForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             updateRow(xhttp.response, reviewIDValue, reviewerIDValue, ratingValue, reservationValue, deliveryValue);
-            if (window.confirm("Changes have been saved. Do you want to reload the page?")) {
-                window.location.reload();
-                window.scrollTo(0, 0);
-            }
+            window.location.reload();
+            
+            //if (window.confirm("Changes have been saved. Do you want to reload the page?")) {
+            //    window.location.reload();
+            //    window.scrollTo(0, 0);
+            //}
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")

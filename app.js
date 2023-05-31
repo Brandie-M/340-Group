@@ -14,8 +14,8 @@ var helpers = require('handlebars-helpers')();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-//PORT        = 27491;                 // Port number (BRANDIE)
-PORT        = 11719;                 // Port number (JOANA)
+PORT        = 27491;                 // Port number (BRANDIE)
+//PORT        = 11719;                 // Port number (JOANA)
 
 
 // Handlebars
@@ -308,6 +308,27 @@ db.pool.query(query1, function(error, rows, fields){
 })
 }); 
 
+// DELETE
+app.delete('/delete-cuisine-ajax/', function(req,res,next){
+    let data = req.body;
+    let cuisineID = parseInt(data.id);
+    let deleteCuisine= `DELETE FROM Cuisines WHERE cuisineID = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteCuisine, [cuisineID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              res.sendStatus(204)
+            })});
+
+
 
 //-------------------------
 // Price Levels page
@@ -354,6 +375,26 @@ db.pool.query(query1, function(error, rows, fields){
 })
 }); 
 
+
+// DELETE
+app.delete('/delete-price-ajax/', function(req,res,next){
+    let data = req.body;
+    let priceID = parseInt(data.id);
+    let deletePrice= `DELETE FROM Price_Levels WHERE priceID = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deletePrice, [priceID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              res.sendStatus(204)
+            })});
 
 
 //-------------------------
@@ -551,7 +592,14 @@ app.delete('/delete-reviewer-ajax/', function(req,res,next){
 //  BROWSE
 app.get('/expenses', function(req, res)
     {  
-        let query1 = 'Select * FROM Expenses';              // Define our query
+        
+
+        //let query1 = 'Select * FROM Expenses';              // Define our query
+        let query1 = `SELECT Expenses.expenseID, Expenses.date, Expenses.totalExpense, Expenses.description, Expenses.expenseStatus, 
+                        CONCAT(Reviewers.lastName, '-', Reviewers.reviewerID) as reviewerNameID, CONCAT(Reviews.reviewID, '-', Reviews.reviewTitle) as reviewIDTitle
+                    FROM Expenses
+                    LEFT JOIN Reviewers on Reviewers.reviewerID = Expenses.reviewerID
+                    LEFT JOIN Reviews on Reviews.reviewID = Expenses.reviewID;`
         let query2 = "SELECT * FROM Reviewers;";
         let query3 = "SELECT * FROM Reviews;";
 
@@ -591,7 +639,7 @@ app.post('/add-expense-form', function(req, res){
 
     // Create the query and run it on the database
     query1 = `INSERT INTO Expenses (date, totalExpense, description, expenseStatus, reviewerID, reviewID) 
-            VALUES ('${data['dateInput']}', '${data['totalExpenseInput']}', '${data['descriptionInput']}',   
+            VALUES ('${data['dateInput']}', '${data['totalExpenseInput']}', "${data['descriptionInput']}",   
             '${data['expenseStatusInput']}', '${data['reviewerIDInput']}', '${data['reviewIDInput']}')`;
 
     db.pool.query(query1, function(error, rows, fields){

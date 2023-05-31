@@ -3,9 +3,9 @@
 <h1>Price Levels</h1>
 
 <div>
-    <h3>Browse Price Levels</h3>
+    <h3>Browse or Delete Price Levels</h3>
     {{!-- Create a table --}}
-    <table>
+    <table id="price-levels-table">
 
         {{!-- Header section --}}
         <thead>
@@ -15,6 +15,7 @@
             <tr>
                 <th>Price ID</th>
                 <th>Price Range</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -23,13 +24,15 @@
 
             {{!-- For each row, print the following in order --}}
             {{#each data}}
-            <tr>
+            <tr data-value="{{this.priceID}}">
                 <td>{{this.priceID}}</td>
                 <td>{{this.priceRange}}</td>
+                <td><button onclick="deletePrice({{this.priceID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+    <script src="../public/js/delete_prices.js"></script>
     <br>
 </div>
 

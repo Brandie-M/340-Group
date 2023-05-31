@@ -4,9 +4,9 @@
 <h1>Cuisines</h1>
 
 <div>
-    <h3>Browse Cuisines</h3>
+    <h3>Browse or Delete Cuisines</h3>
     {{!-- Create a table --}}
-    <table>
+    <table id="cuisine-table">
 
         {{!-- Header section --}}
         <thead>
@@ -14,11 +14,9 @@
             {{!-- For just the first row, we print each key of the row object as a header cell so we
             know what each column means when the page renders --}}
             <tr>
-                {{#each data.[0]}}
-                <th>
-                    {{@key}}
-                </th>
-                {{/each}}
+                <th>Cuisine ID</th>
+                <th>Description</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -27,13 +25,15 @@
 
             {{!-- For each row, print the following in order --}}
             {{#each data}}
-            <tr>
+            <tr data-value={{this.cuisineID}}> 
                 <td>{{this.cuisineID}}</td>
                 <td>{{this.cuisineDescription}}</td>
+                <td><button onclick="deleteCuisine({{this.cuisineID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+    <script src="../public/js/delete_cuisines.js"></script>
     <br>
 </div>
 
