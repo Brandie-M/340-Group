@@ -14,8 +14,8 @@ var helpers = require('handlebars-helpers')();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 27491;                 // Port number (BRANDIE)
-//PORT        = 11719;                 // Port number (JOANA)
+//PORT        = 27491;                 // Port number (BRANDIE)
+PORT        = 11719;                 // Port number (JOANA)
 
 
 // Handlebars
