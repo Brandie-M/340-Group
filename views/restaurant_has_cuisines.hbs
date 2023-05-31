@@ -45,8 +45,7 @@
     <h3>Add Cuisine to Restaurant</h3>
     <form id="add-restaurant-cuisine-form" action="/add-restaurant-cuisine-form" method="POST">
         <p>To associate a cuisine with a restaurant, complete the form and hit submit.</p>
-
-        <label for="restaurantIDInput">Restaurant Name</label>
+                <label for="restaurantIDInput">Restaurant Name</label>
         <select id="addRestaurantIDInput" name="restaurantIDInput" required>
             <option value="">Select a Restaurant</option>
             {{#each restaurants}}
@@ -63,6 +62,9 @@
         </select>
     <br>
     
+    <p><strong>Please note:</strong></p>
+    <p>Restaurant + cuisine relationshihps are <strong>unique</strong>.</p>
+    <p>Attempting to add or update to an existing restaurant + cuisine association will result in an error. </p>
 
     <input type="submit">
     </form>
@@ -104,7 +106,12 @@
 
     <br>
 
+        <p><strong>Please note:</strong></p>
+        <p>Restaurant + cuisine relationshihps are <strong>unique</strong>.</p>
+        <p>Attempting to add or update to an existing restaurant + cuisine association will result in an error. </p>
+
         <button onclick="updateRestaurantCuisines(event)">Update</button>
+        <p id="successMessage" style="display: none;">Update successful!</p>
     </form>
     <script src="../public/js/update_restaurant_cuisines.js"></script>
 

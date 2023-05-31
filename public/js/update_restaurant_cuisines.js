@@ -35,6 +35,10 @@ function updateRestaurantCuisines(event) {
 
             // Add the new data to the table
             updateRow(restaurantCuisineID, restaurantName, cuisineDescription);
+
+            // Display the success message
+            var successMessage = document.getElementById("successMessage");
+            successMessage.style.display = "block";
             
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -44,6 +48,7 @@ function updateRestaurantCuisines(event) {
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
+
 }
 
 function updateRow(restaurantCuisineID, restaurantName, cuisineDescription){

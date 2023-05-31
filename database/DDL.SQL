@@ -45,7 +45,8 @@ CREATE TABLE Restaurant_has_Cuisines(
     restaurantID	        INT 	        NOT NULL,           
     PRIMARY KEY		(restaurant_cuisineID),
     FOREIGN KEY     (cuisineID)         REFERENCES Cuisines (cuisineID) ON DELETE CASCADE,
-    FOREIGN KEY     (restaurantID)      REFERENCES Restaurants (restaurantID) ON DELETE CASCADE
+    FOREIGN KEY     (restaurantID)      REFERENCES Restaurants (restaurantID) ON DELETE CASCADE,
+    CONSTRAINT      unique_combination  UNIQUE (cuisineID, restaurantID)
 );
 
 
