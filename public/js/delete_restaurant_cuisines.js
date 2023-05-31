@@ -19,6 +19,9 @@ function deleteRestaurantCuisines(restaurant_cuisineID) {
             // Add the new data to the table
             deleteRow(restaurant_cuisineID);
 
+            // refresh the page
+            location.reload();
+
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {
         }
