@@ -14,8 +14,8 @@ var helpers = require('handlebars-helpers')();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 27491;                 // Port number (BRANDIE)
-//PORT        = 11717;                 // Port number (JOANA)
+//PORT        = 27491;                 // Port number (BRANDIE)
+PORT        = 11717;                 // Port number (JOANA)
 
 
 // Handlebars
@@ -492,6 +492,56 @@ app.get('/reviewers', function(req, res)
     });                                                         // received back from the query
 
 
+// ADD NEW
+//Add a new reviewer
+app.post('/add-reviewer-form', function(req, res) {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Reviewers (firstName, lastName, phoneNumber, streetAddress, city, state, zipCode, emailAddress)
+        VALUES ('${data['firstNameInput']}', '${data['lastNameInput']}', '${data['phoneNumberInput']}', '${data['streetAddressInput']}', '${data['cityInput']}', '${data['stateInput']}', '${data['zipCodeInput']}', '${data['emailAddressInput']}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our restaurants route, which automatically runs the SELECT * FROM Restaurants and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/reviewers');
+        }
+    })
+});
+
+
+// DELETE
+app.delete('/delete-reviewer-ajax/', function(req,res,next){
+    let data = req.body;
+    let reviewerID = parseInt(data.id);
+    let deleteReviewers= `DELETE FROM Reviewers WHERE reviewerID = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteReviewers, [reviewerID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              res.sendStatus(204)
+            })});
+
 
 
 //-------------------------
@@ -502,20 +552,87 @@ app.get('/reviewers', function(req, res)
 app.get('/expenses', function(req, res)
     {  
         let query1 = 'Select * FROM Expenses';              // Define our query
+        let query2 = "SELECT * FROM Reviewers;";
+        let query3 = "SELECT * FROM Reviews;";
 
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+        /// Run the 1st query
+        db.pool.query(query1, function(error, rows, fields){
+                
+            // Save the expenses
+            let expenses = rows;
+            
+            // Run the second query
+            db.pool.query(query2, (error, rows, fields) => {
+                
+                // Save the reviewers
+                let reviewers = rows;
 
-            res.render('expenses', {data: rows});           // Render the price_levels.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query
+                // Run the third query
+                db.pool.query(query3, (error, rows, fields) => {
+                
+                    // Save the reviews
+                    let reviews = rows;
+                    return res.render('expenses', {data: expenses, reviews: reviews, reviewers: reviewers});
+                })
+            })
+        })                                              
+
+    
+    });  
+    // received back from the query
 
 
 
+//Add a new expense
+app.post('/add-expense-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
 
 
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Expenses (date, totalExpense, description, expenseStatus, reviewerID, reviewID) 
+            VALUES ('${data['dateInput']}', '${data['totalExpenseInput']}', '${data['descriptionInput']}',   
+            '${data['expenseStatusInput']}', '${data['reviewerIDInput']}', '${data['reviewIDInput']}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our expense route, which automatically runs the SELECT * FROM Expenses and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/expenses');
+        }
+})
+}); 
 
 
-
+// DELETE
+app.delete('/delete-expense-ajax/', function(req,res,next){
+    let data = req.body;
+    let expenseID = parseInt(data.id);
+    let deleteExpenses= `DELETE FROM Expenses WHERE expenseID = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteExpenses, [expenseID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              res.sendStatus(204)
+            })});
 
 // CSS route
 app.use('/public', express.static(path.join(__dirname, '/public')))

@@ -3,102 +3,92 @@
 
 <h1>Expenses</h1>
 
-    <div>
-      <h3>Browse Expenses [ STATIC ]</h3>
+<div>
+  <h3>Browse Expenses</h3>
+    {{!-- Create a table --}}
+    <table id="expense-table">
 
-      <table border="1" padding="5">
-        <thead>
-          <tr>
-            <th>Expense ID</th>
-            <th>Date</th>
-            <th>Total Expense</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Reviewer Last Name</th>
-            <th>Review ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>2022-04-12</td>
-            <td>75.00</td>
-            <td>Dinner at Duke's Waikiki</td>
-            <td>Approved</td>
-            <td>Wong</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2022-05-03</td>
-            <td>25.00</td>
-            <td>Parking at Mercantile Dining &amp; Provisions</td>
-            <td>Pending</td>
-            <td>Smith</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>2022-06-01</td>
-            <td>100.00</td>
-            <td>Mileage to Iron Grill Hawaii food truck</td>
-            <td>Approved</td>
-            <td>Wong</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>2022-06-15</td>
-            <td>85.00</td>
-            <td>Lunch at Iron Grill Hawaii food truck</td>
-            <td>Rejected</td>
-            <td>Wong</td>
-            <td>3</td>
-          </tr>
-        </tbody>
-      </table>
+      {{!-- Header section --}}
+      <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+          <th>Expense ID</th>
+          <th>Date</th>
+          <th>Total Expense</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Reviewer Last Name</th>
+          <th>Review ID</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
       
-    </div>
+      {{!-- Body section --}}
+      <tbody>
 
-    <div>
-      <h3>Add New Expense [ STATIC ]</h3>
-      <form action="/submit-form" method="post">
+        {{!-- For each row, print the following in order --}}
+        {{#each data}}
+        <tr data-value="{{this.expenseID}}">
+          <td>{{this.expenseID}}</td>
+          <td>{{this.date}}</td>
+          <td>{{this.totalExpense}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.expenseStatus}}</td>
+          <td>{{this.reviewerID}}</td>
+          <td>{{this.reviewID}}</td>
+          <td><button onclick="deleteExpense({{this.expenseID}})">Delete</button></td>  
+        </tr>
+        {{/each}}
+          
+      </tbody>
+    </table>
+    <script src="../public/js/delete_expense.js"></script>
+    <br>
+      
+  </div>
+
+    
+  <div>
+    <h3>Add New Expense</h3>
+    <form id="add-expense-form" method="POST" action="/add-expense-form">
+
+      <p> To add a new expense, complete the form and hit submit</p> 
               
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date"><br><br>
+      <label for="dateInput">Date:</label>
+      <input type="date" id="dateInput" name="dateInput"><br>
       
-        <label for="totalExpense">Total Expense:</label>
-        <input type="number" id="totalExpense" name="totalExpense"><br><br>
+      <label for="totalExpenseInput">Total Expense:</label>
+      <input type="number" id="totalExpenseInput" name="totalExpenseInput"><br><br>
       
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description"><br>
+      <label for="descriptionInput">Description:</label>
+      <input type="text" id="descriptionInput" name="descriptionInput"><br>
       
-        <label for="expenseStatus">Status:</label>
-        <select> id="expenseStatus" name="expenseStatus"
-          <option value=""></option>
-          <option value="Pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Paid">Paid</option>
-          <option value="Rejected">Rejected</option>
-        </select> <br>
+      <label for="expenseStatusInput">Status:</label>
+      <select id="expenseStatusInput" name="expenseStatusInput">
+        <option value=""></option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Paid">Paid</option>
+        <option value="Rejected">Rejected</option>
+      </select> <br>
 
-        <label for="reviewID"> Reviewer Last Name & ID:</label>
-        <select id="reviewID" name="reviewID">
-          <option value=""></option>
-          <option value="1">Smith-1</option>
-          <option value="2">Wong-2</option>
-          <option value="3">Johnson-3</option>
-          <option value="4">Hernandez-4</option>
+      <label for="reviewerIDInput"> Reviewer Last Name & ID:</label>
+        <select id="reviewerIDInput" name="reviewerIDInput" required>
+          <option value="">Select the last name & ID</option>
+          {{#each reviewers}}
+          <option value="{{this.reviewerID}}">{{this.lastName}}-{{this.reviewerID}}</option>
+          {{/each}}
         </select><br>
       
-        <label for="reviewID"> Review ID (Note: Use the Review ID from the review that you created):</label>
-        <select id="reviewID" name="reviewID">
-          <option value=""></option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select><br>
+      <label for="reviewIDInput"> Review ID (Note: Use the Review ID from the review that you created):</label>
+      <select id="reviewIDInput" name="reviewIDInput">
+        <option value="">Select the Review ID</option>
+        {{#each reviews}}
+        <option value"{{this.reviewID}}">{{this.reviewID}}</option>
+        {{/each}}
+      </select><br>
 
         <input type="submit" value="Submit">
       </form>

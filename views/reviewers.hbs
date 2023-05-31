@@ -3,9 +3,16 @@
 
 <h1>Reviewers</h1>
 
-    <h3>Browse Reviewers [ STATIC ]</h3>
-    <table border="1" padding="5">
+<div> 
+  <h3>Browse Reviewers</h3>
+    {{!-- Create a table --}}
+    <table id="reviewer-table">
+      
+      {{!-- Header section --}}
       <thead>
+        
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
         <tr>
           <th>ReviewerID</th>
           <th>First Name</th>
@@ -16,86 +23,69 @@
           <th>State</th>
           <th>Zip Code</th>
           <th>Email Address</th>
+          <th>Delete</th>
         </tr>
       </thead>
+
+      {{!-- Body section --}}
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Smith</td>
-          <td>(303) 555-1234</td>
-          <td>123 Main St</td>
-          <td>Denver</td>
-          <td>Colorado</td>
-          <td>80204</td>
-          <td>john.smith@email.com</td>
+        
+        {{!-- For each row, print the following in order --}}
+        {{#each data}}
+        <tr data-value={{this.reviewerID}}>
+          <td>{{this.reviewerID}}</td>
+          <td>{{this.firstName}}</td>
+          <td>{{this.lastName}}</td>
+          <td>{{this.phoneNumber}}</td>
+          <td>{{this.streetAddress}}</td>
+          <td>{{this.city}}</td>
+          <td>{{this.state}}</td>
+          <td>{{this.zipCode}}</td>
+          <td>{{this.emailAddress}}</td>
+          <td><button onclick="deleteReviewer({{this.reviewerID}})">Delete</button></td>   
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Karen</td>
-          <td>Wong</td>
-          <td>(808) 555-5678</td>
-          <td>456 Oak St</td>
-          <td>Honolulu</td>
-          <td>Hawaii</td>
-          <td>96815</td>
-          <td>karen.wong@email.com</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Michael</td>
-          <td>Johnson</td>
-          <td>(415) 555-9012</td>
-          <td>789 Pine St</td>
-          <td>San Francisco</td>
-          <td>California</td>
-          <td>94109</td>
-          <td>michael.johnson@email.com</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Rachel</td>
-          <td>Hernandez</td>
-          <td>(512) 555-3456</td>
-          <td>101 Elm St</td>
-          <td>Austin</td>
-          <td>Texas</td>
-          <td>78701</td>
-          <td>rachel.hernandez@email.com</td>
-        </tr>
+        {{/each}}
       </tbody>
     </table>
-    </div>
+    <script src="../public/js/delete_reviewer.js"></script>
+    <br>
 
-    <div>
-      <h3>Add New Reviewer [ STATIC ]</h3>
-      <form action="/submit-form" method="post">
-              
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName"><br>
-      
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName"><br>
+  </div>
 
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber"><br>
 
-        <label for="streetAddress">Street Address:</label>
-        <input type="text" id="streetAddress" name="streetAddress"><br>
+
+  <div>
+    <h3>Add New Reviewer</h3>
+    <form id="add-reviewer-form" method="POST" action="/add-reviewer-form" >
+        
+      <p> To add a new reviewer, complete the form and hit submit</p> 
+
+      <label for="firstNameInput">First Name:</label>
+      <input type="text" id="firstNameInput" name="firstNameInput"><br>
       
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city"><br>
+      <label for="lastNameInput">Last Name:</label>
+      <input type="text" id="lastNameInput" name="lastNameInput"><br>
+
+      <label for="phoneNumberInput">Phone Number:</label>
+      <input type="text" id="phoneNumberInput" name="phoneNumberInput"><br>
+
+      <label for="streetAddressInput">Street Address:</label>
+      <input type="text" id="streetAddressInput" name="streetAddressInput"><br>
       
-        <label for="state">State:</label>
-        <input type="text" id="state" name="state"><br>
+      <label for="cityInput">City:</label>
+      <input type="text" id="cityInput" name="cityInput"><br>
       
-        <label for="zipCode">Zip Code:</label>
-        <input type="text" id="zipCode" name="zipCode"><br>
+      <label for="stateInput">State:</label>
+      <input type="text" id="stateInput" name="stateInput"><br>
       
-        <label for="emailAddress">Email:</label>
-        <input type="text" id="emailAddress" name="emailAddress"><br><br>
+      <label for="zipCodeInput">Zip Code:</label>
+      <input type="text" id="zipCodeInput" name="zipCodeInput"><br>
+      
+      <label for="emailAddressInput">Email:</label>
+      <input type="text" id="emailAddressInput" name="emailAddressInput"><br>
       
       
-        <input type="submit" value="Submit">
-      </form>
-    </div>
+      <input type="submit">
+
+    </form>
+  </div>
