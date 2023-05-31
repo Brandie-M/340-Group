@@ -16,7 +16,7 @@
         <tr>
           <th>Expense ID</th>
           <th>Date</th>
-          <th>Total Expense</th>
+          <th>Total Expense ($)</th>
           <th>Description</th>
           <th>Status</th>
           <th>Reviewer Last Name</th>
@@ -32,12 +32,12 @@
         {{#each data}}
         <tr data-value="{{this.expenseID}}">
           <td>{{this.expenseID}}</td>
-          <td>{{this.date}}</td>
+          <td>{{moment this.date format="YYYY-MM-DD"}}</td>
           <td>{{this.totalExpense}}</td>
           <td>{{this.description}}</td>
           <td>{{this.expenseStatus}}</td>
-          <td>{{this.reviewerID}}</td>
-          <td>{{this.reviewID}}</td>
+          <td>{{this.reviewerNameID}}</td>
+          <td>{{this.reviewIDTitle}}</td>
           <td><button onclick="deleteExpense({{this.expenseID}})">Delete</button></td>  
         </tr>
         {{/each}}
@@ -57,13 +57,13 @@
       <p> To add a new expense, complete the form and hit submit</p> 
               
       <label for="dateInput">Date:</label>
-      <input type="date" id="dateInput" name="dateInput"><br>
+      <input type="date" id="dateInput" name="dateInput" required><br>
       
       <label for="totalExpenseInput">Total Expense:</label>
-      <input type="number" id="totalExpenseInput" name="totalExpenseInput"><br><br>
+      <input type="number" step = "0.01" id="totalExpenseInput" name="totalExpenseInput" required><br><br>
       
       <label for="descriptionInput">Description:</label>
-      <input type="text" id="descriptionInput" name="descriptionInput"><br>
+      <input type="text" id="descriptionInput" name="descriptionInput" required><br>
       
       <label for="expenseStatusInput">Status:</label>
       <select id="expenseStatusInput" name="expenseStatusInput">
@@ -76,17 +76,17 @@
 
       <label for="reviewerIDInput"> Reviewer Last Name & ID:</label>
         <select id="reviewerIDInput" name="reviewerIDInput" required>
-          <option value="">Select the last name & ID</option>
+          <option value="">Select last name & ID:</option>
           {{#each reviewers}}
           <option value="{{this.reviewerID}}">{{this.lastName}}-{{this.reviewerID}}</option>
           {{/each}}
         </select><br>
       
-      <label for="reviewIDInput"> Review ID (Note: Use the Review ID from the review that you created):</label>
-      <select id="reviewIDInput" name="reviewIDInput">
-        <option value="">Select the Review ID</option>
+      <label for="reviewIDInput"> Review ID and Title:</label>
+      <select id="reviewIDInput" name="reviewIDInput" required>
+        <option value="">Select Review ID and Title</option>
         {{#each reviews}}
-        <option value"{{this.reviewID}}">{{this.reviewID}}</option>
+        <option value"{{this.reviewID}}">{{this.reviewID}}-{{this.reviewTitle}}</option>
         {{/each}}
       </select><br>
 

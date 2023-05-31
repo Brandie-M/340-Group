@@ -161,10 +161,11 @@ WHERE reviewID = :reviewIDInput;
 -- Browse All
 ------ Note, chose to leave the reviewID as the ID number instead of adding the review name. 
 -------Similar to referencing an invoice id rather than the items in an order.
-SELECT Expenses.expenseID, Expenses.date, Expenses.totalExpense, Expenses.description, 
-Expenses.expenseStatus, CONCAT(Reviewers.lastName, '-', Reviewers.reviewerID) as reviewerNameID, Expenses.reviewID
+SELECT Expenses.expenseID, Expenses.date, Expenses.totalExpense, Expenses.description, Expenses.expenseStatus, 
+        CONCAT(Reviewers.lastName, '-', Reviewers.reviewerID) as reviewerNameID, CONCAT(Reviews.reviewID, '-', Reviews.reviewTitle) as reviewIDTitle
 FROM Expenses
-JOIN Reviewers ON Expenses.reviewerID = Reviewers.reviewerID;
+LEFT JOIN Reviewers on Reviewers.reviewerID = Expenses.reviewerID
+LEFT JOIN Reviews on Reviews.reviewID = Expenses.reviewID;
 
 
 -- Insert New
