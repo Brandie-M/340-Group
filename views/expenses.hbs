@@ -1,10 +1,16 @@
 {{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
+{{!Full citation in readme}}
 
+<h1>Expenses to be Reimbursed to Reviewer</h1>
 
-<h1>Expenses</h1>
+<div class="description">
+<p>Expenses that a reviewer can incur as a result of a  review that require reimbursement could include dining bills, parking, mileage, etc.</p>
+<p>Expenses can be viewed, added and deleted.</p>
+</div>
 
 <div>
-  <h3>Browse Expenses</h3>
+  <h3>Browse or Delete Expenses</h3>
+  
     {{!-- Create a table --}}
     <table id="expense-table">
 
@@ -51,18 +57,20 @@
 
     
   <div>
-    <h3>Add New Expense</h3>
+    <h3>Add New Expense Request</h3>
     <form id="add-expense-form" method="POST" action="/add-expense-form">
 
-      <p> To add a new expense, complete the form and hit submit</p> 
+      <p> To add a new reimbursement request, complete the form with your expense and hit submit. </p> 
               
       <label for="dateInput">Date:</label>
       <input type="date" id="dateInput" name="dateInput" required><br>
       
-      <label for="totalExpenseInput">Total Expense:</label>
-      <input type="number" step = "0.01" id="totalExpenseInput" name="totalExpenseInput" required><br><br>
+      <label for="totalExpenseInput">Total Expense ($) to be Reimbursed:</label>
+      <p class="form-description">(This amount must match any receipts submitted.)</p>
+      <input type="number" step = "0.01" min="0.01" id="totalExpenseInput" name="totalExpenseInput" required><br>
       
       <label for="descriptionInput">Description:</label>
+      <p class="form-description">(Dining bill, parking fee, mileage, etc.)</p>
       <input type="text" id="descriptionInput" name="descriptionInput" required><br>
       
       <label for="expenseStatusInput">Status:</label>

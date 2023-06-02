@@ -2,9 +2,11 @@
 
 
 <h1>Reviewers</h1>
-
+<div class="description">
+<p>Personal information about the individual reviewers as may be needed by the business. Reviewers can be viewed, added and deleted.</p>
+</div>
 <div> 
-  <h3>Browse Reviewers</h3>
+  <h3>Browse or Delete Reviewers</h3>
     {{!-- Create a table --}}
     <table id="reviewer-table">
       
@@ -66,8 +68,9 @@
       <label for="lastNameInput">Last Name:</label>
       <input type="text" id="lastNameInput" name="lastNameInput" required><br>
 
-      <label for="phoneNumberInput">Phone Number:</label>
-      <input type="text" id="phoneNumberInput" name="phoneNumberInput"><br>
+      <label for="phoneNumberInput">Phone Number :</label>
+      <p class="form-description">(Required format: 555-555-5555)</p>
+      <input type="tel" id="phoneNumberInput" name="phoneNumberInput"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="555-555-5555"><br>
 
       <label for="streetAddressInput">Street Address:</label>
       <input type="text" id="streetAddressInput" name="streetAddressInput"><br>
@@ -79,10 +82,12 @@
       <input type="text" id="stateInput" name="stateInput" required><br>
       
       <label for="zipCodeInput">Zip Code:</label>
-      <input type="text" id="zipCodeInput" name="zipCodeInput" required><br>
+      <p class="form-description">(Required format: 12345)</p>
+      <input type="text" id="zipCodeInput" name="zipCodeInput" pattern="[0-9]*" placeholder="12345" required><br>
       
       <label for="emailAddressInput">Email:</label>
-      <input type="text" id="emailAddressInput" name="emailAddressInput"><br>
+      <p class="form-description">(Required format: emailaddress@email.com)</p>
+      <input type="email" id="emailAddressInput" name="emailAddressInput"><br>
       
       
       <input type="submit">

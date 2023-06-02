@@ -1,8 +1,11 @@
 {{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
-
+{{!Full citation in readme}}
 
 
 <h1>Restaurants</h1>
+<div class="description">
+<p>Restaurants that have been/will be reviewed. Restaurants may be viewed, added and deleted.</p>
+</div>
 
 <div>
     <h3>Browse or Delete Restaurants</h3>
@@ -74,10 +77,12 @@
         <input type="text" name="stateInput" id="stateInput" required>
         
         <label for="zipCodeInput">Zip Code:</label>
-        <input type="text" name="zipCodeInput" id="zipCodeInput" >
+        <p class="form-description">(Required format: 12345)</p>
+        <input type="text" id="zipCodeInput" name="zipCodeInput" pattern="[0-9]*" placeholder="12345" required><br>
         
         <label for="phoneNumberInput">Phone Number:</label>
-        <input type="text" name="phoneNumberInput" id="phoneNumberInput" >
+        <p class="form-description">(Required format: 555-555-5555)</p>
+        <input type="tel" id="phoneNumberInput" name="phoneNumberInput"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="555-555-5555"><br>
         
         <label for="websiteInput">Website:</label>
         <input type="text" name="websiteInput" id="websiteInput" >
@@ -85,7 +90,7 @@
         {{!<label for="priceIDInput">Price Range:</label>
         <input type="text" name="priceIDInput" id="priceIDInput" > }}
         
-        <label for="priceIDInput">Price Range</label>
+        <label for="priceIDInput">Price Range:</label>
         <select id="priceIDInput" name="priceIDInput" required>
             <option value="">Select a Price Range</option>
             {{#each price_levels}}

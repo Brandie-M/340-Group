@@ -1,5 +1,5 @@
 // citation: Node.js starter guide. https://github.com/osu-cs340-ecampus/nodejs-starter-app
-
+// Full citation in ReadMe
 
 
 /*

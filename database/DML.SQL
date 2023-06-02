@@ -1,3 +1,5 @@
+ /*Citation: Based on Modules 3 & 4 . Full citation in ReadMe.  
+ */
 -----------------------------
 -- Dropdowns --
 ---- queries for populating dropdowns for the foreign keys in forms

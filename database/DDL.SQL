@@ -1,4 +1,5 @@
- 
+ /*Citation: Based on Modules 3 & 4 . Full citation in ReadMe.  
+ */
 
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,11 +107,11 @@ Insert Data
 /* Restaurants sample data */
 INSERT INTO Restaurants (restaurantID, name, streetAddress, city, state, zipCode, phoneNumber, website, priceID)
 VALUES
-(1, 'Duke\'s Waikiki', '2335 Kalakaua Ave', 'Honolulu', 'HI', '96815', '(808) 922-2268', 'https://www.dukeswaikiki.com/', 3),
-(2, 'Iron Grill Hawaii Food Truck', NULL, 'Honolulu', 'HI', '96815', '(808) 202-7939', NULL, 2),
-(3, 'Sushi Den', '1487 S Pearl St', 'Denver', 'CO', '80210', '(303) 777-0826', 'https://www.sushiden.net/', 3),
-(4, 'Mercantile Dining & Provisions', '1701 Wynkoop St', 'Denver', 'CO', '80202', '(720) 460-3733', 'https://www.mercantiledenver.com/', 4),
-(5, 'Flagstaff House', '1138 Flagstaff Rd', 'Boulder', 'CO', '80302', '(303) 442-4640', 'https://www.flagstaffhouse.com/', 4);
+(1, 'Duke\'s Waikiki', '2335 Kalakaua Ave', 'Honolulu', 'HI', '96815', '808-922-2268', 'https://www.dukeswaikiki.com/', 3),
+(2, 'Iron Grill Hawaii Food Truck', NULL, 'Honolulu', 'HI', '96815', '808-202-7939', NULL, 2),
+(3, 'Sushi Den', '1487 S Pearl St', 'Denver', 'CO', '80210', '808-777-0826', 'https://www.sushiden.net/', 3),
+(4, 'Mercantile Dining & Provisions', '1701 Wynkoop St', 'Denver', 'CO', '80202', '720- 460-3733', 'https://www.mercantiledenver.com/', 4),
+(5, 'Flagstaff House', '1138 Flagstaff Rd', 'Boulder', 'CO', '80302', '303-442-4640', 'https://www.flagstaffhouse.com/', 4);
 
 
 
@@ -147,10 +148,10 @@ VALUES
 /* Reviewers sample data */
 INSERT INTO `Reviewers` (firstName, lastName, streetAddress, city, state, zipCode, phoneNumber, emailAddress)
 VALUES 
-('John', 'Smith', '123 Main St', 'Denver', 'Colorado', '80204', '(303) 555-1234', 'john.smith@email.com'),
-('Karen', 'Wong', '456 Oak St', 'Honolulu', 'Hawaii', '96815', '(808) 555-5678', 'karen.wong@email.com'),
-('Michael', 'Johnson', '789 Pine St', 'San Francisco', 'California', '94109', '(415) 555-9012', 'michael.johnson@email.com'),
-('Rachel', 'Hernandez', '101 Elm St', 'Austin', 'Texas', '78701', '(512) 555-3456', 'rachel.hernandez@email.com');
+('John', 'Smith', '123 Main St', 'Denver', 'Colorado', '80204', '303-555-1234', 'john.smith@email.com'),
+('Karen', 'Wong', '456 Oak St', 'Honolulu', 'Hawaii', '96815', '808-555-5678', 'karen.wong@email.com'),
+('Michael', 'Johnson', '789 Pine St', 'San Francisco', 'California', '94109', '415-555-9012', 'michael.johnson@email.com'),
+('Rachel', 'Hernandez', '101 Elm St', 'Austin', 'Texas', '78701', '512-555-3456', 'rachel.hernandez@email.com');
 
 
 /* Reviews sample data */

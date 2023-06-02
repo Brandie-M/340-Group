@@ -1,10 +1,14 @@
 {{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
-
+{{!Full citation in readme}}
 
 <h1>Restaurant Cuisines</h1>
+<div class="description">
+<p>Relationships between cuisines and the restaurants that serve them. A single restaurant could have multiple
+      cuisines. (ex.: A restaurant can serve both Indian and vegetarian cuisines) Relationships may be viewed, added, updated, and deleted.</p>
+</div>
 
 <div>
-    <h3>Browse or Delete </h3>
+    <h3>Browse or Delete a Restaurant Cuisine Relationship</h3>
     {{!-- Create a table --}}
     <table id="restaurant-cusines-table">
 
@@ -44,8 +48,8 @@
 <div>
     <h3>Add Cuisine to Restaurant</h3>
     <form id="add-restaurant-cuisine-form" action="/add-restaurant-cuisine-form" method="POST">
-        <p>To associate a cuisine with a restaurant, complete the form and hit submit.</p>
-                <label for="restaurantIDInput">Restaurant Name</label>
+        <p>To associate a cuisine with a restaurant, complete the form and hit Submit.</p>
+                <label for="restaurantIDInput">Restaurant Name:</label>
         <select id="addRestaurantIDInput" name="restaurantIDInput" required>
             <option value="">Select a Restaurant</option>
             {{#each restaurants}}
@@ -53,7 +57,7 @@
             {{/each}}
         </select>
 
-        <label for="cuisineIDInput">Cuisine Name</label>
+        <label for="cuisineIDInput">Cuisine Name:</label>
         <select id="addCuisineIDInput" name="cuisineIDInput" required>
             <option value="">Select a Cuisine</option>
             {{#each cuisines}}
@@ -63,7 +67,7 @@
     <br>
     
     <p><strong>Please note:</strong></p>
-    <p>Restaurant + cuisine relationshihps are <strong>unique</strong>.</p>
+    <p>Restaurant + cuisine relationships are <strong>unique</strong>.</p>
     <p>Attempting to add or update to an existing restaurant + cuisine association will result in an error. </p>
 
     <input type="submit">
@@ -73,9 +77,9 @@
 
 
 <div>
-    <h3>Update Restaurant Cuisine</h3>
+    <h3>Update Restaurant Cuisine (M:N Update)</h3>
     <form>
-
+    <p>To update an association between cuisine and restaurant, complete the form and hit Update.</p>
     <label for="restaurant_CuisineID">Restaurant Cusine ID:</label>
     <select id="updateRestaurant_CuisineID" name="restaurant_CuisineID" required>
         <option value="">Select Restaurant Cuisine ID</option>
@@ -86,7 +90,7 @@
 
     <br>
         
-    <label for="restaurantIDInput">Restaurant Name</label>
+    <label for="restaurantIDInput">Restaurant Name:</label>
     <select id="updateRestaurantIDInput" name="restaurantIDInput" required>
         <option value="">Select a Restaurant</option>
         {{#each restaurants}}
@@ -96,7 +100,7 @@
     
     <br>
 
-    <label for="cuisineIDInput">Cuisine Name</label>
+    <label for="cuisineIDInput">Cuisine Name:</label>
     <select id="updateCuisineIDInput" name="cuisineIDInput" required>
         <option value="">Select a Cuisine</option>
         {{#each cuisines}}

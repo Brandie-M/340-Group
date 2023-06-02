@@ -1,10 +1,15 @@
 {{!-- Citation: CS340 github for node starter app. https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main  --}}
-
+{{!Full citation in readme}}
 
 <h1>Reviews</h1>
+
+<div class="description">
+<p>Records of the reviews that have been completed by reviewers. Each review is for a specific restaurant but each restaurant can have multiple reviews. 
+      Reviews can be viewed, added, deleted, and updated.</p>
+</div>
   {{! BROWSE }}
   <div>
-    <h3>Browse Reviews</h3>
+    <h3>Browse or Delete Reviews</h3>
     {{!-- Create a table --}}
     <table id="review-table">
 
@@ -58,10 +63,10 @@
 
     <form id="add-review-form" method="POST" action="/add-review-form">
 
-      <p>To add a new review, complete the form and hit submit.</p>
+      <p>To add a new review, complete the form and hit Submit.</p>
       <p>Required fields outlined in red.</p>
 
-      <label for="restaurantIDInput">Restaurant Name</label>
+      <label for="restaurantIDInput">Restaurant Name:</label>
       <select id="restaurantIDInput" name="restaurantIDInput" required>
           <option disabled selected value>Select a Restaurant to Review</option>
           {{#each restaurants}}
@@ -69,7 +74,7 @@
           {{/each}}
       </select>
 
-      <label for="reviewerIDInput">Reviewer Last Name and ID</label>
+      <label for="reviewerIDInput">Reviewer Last Name and ID:</label>
       <select id="reviewerIDInput" name="reviewerIDInput" required>
           <option disabled selected value>Select a Reviewer</option>
           {{#each reviewers}}
@@ -90,7 +95,7 @@
         rows="10" cols="35"></textarea><br>
 
       <label for="reviewerRatingInput">Rating between 1 (lowest) and 5 (highest): </label>
-      <input type="number" id="reviewerRatingInput" name="reviewerRatingInput" min="0" max="5" required><br>
+      <input type="number" id="reviewerRatingInput" name="reviewerRatingInput" min="1" max="5" required><br>
     
       <label for="takesReservationInput">Takes Reservations?:</label>
       <select id="takesReservationInput" name="takesReservationInput" required>
@@ -99,7 +104,7 @@
         <option value="" selected>Unknown</option>
       </select>
       
-      <label for="deliveryInput">Does the restaurant offer delivery?</label>
+      <label for="deliveryInput">Does the restaurant offer delivery?:</label>
       <select id="deliveryInput" name="deliveryInput" required>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
@@ -108,7 +113,7 @@
 
 
       
-      <input type="submit" value="Submit New Review">
+      <input type="submit" value="Submit">
     </form>
 
   </div>
@@ -116,8 +121,10 @@
 <br>
   {{! UPDATE }}
   <div>
-    <h3 id="#Update">Update Review</h3>
+    <h3 id="#Update">Update Review (Nullable Update)</h3>
     <form id="update-review-form-ajax">
+      <p>To update a review, complete the form and hit Update.</p>
+      <p>Required fields outlined in red.</p>
 
       <label for="reviewIDInput">Review ID and Title:</label>
       <select id="reviewIDInput" name="reviewIDInput" required>
@@ -129,6 +136,7 @@
       <p></p>   
 
       <label for="reviewerIDInput">Reviewer Last Name and ID:</label>
+      <p class="form-description">***Update to NULL available**</p>
       <select id="reviewerID-update" name="reviewerIDInput" required>
           <option disabled selected value>Select or Remove a Reviewer</option>
           {{#each reviewers}}
@@ -138,7 +146,7 @@
       </select>       
       
       <label for="reviewerRatingInput">Rating between 1 (lowest) and 5 (highest): </label>
-      <input type="number" id="reviewerRating-update" name="reviewerRatingInput" min="0" max="5" required><br>
+      <input type="number" id="reviewerRating-update" name="reviewerRatingInput" min="1" max="5" required><br>
     
       <label for="takesReservationInput">Takes Reservations?:</label>
       <select id="takesReservation-update" name="takesReservationInput" required>
@@ -156,7 +164,7 @@
     
           
 
-        <input type="submit" value="Save Changes">
+        <input type="submit" value="Update">
       </form>
       <script src="../public/js/update_review.js"></script>
   </div>
